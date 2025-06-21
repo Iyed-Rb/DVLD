@@ -70,16 +70,7 @@ namespace DVLDPresentationLayer
         }
 
         private void txtNationalNo_Validating(object sender, CancelEventArgs e)
-        {
-            //if (clsPerson.isPersonExistByNationalNo(txtNationalNo.Text.ToString() ) )
-            //{
-            //    e.Cancel = true; // prevent focus from leaving
-            //    errorProvider1.SetError(txtNationalNo, "National Number is used for Another Person");
-            //}
-            //else
-            //{
-            //    errorProvider1.SetError(txtNationalNo, ""); // Clear the error
-            //}
+        { 
 
             if (_Mode == enMode.AddNew)
             {
@@ -169,8 +160,20 @@ namespace DVLDPresentationLayer
                 }
                 else
                 {
-                    pbPersonImage.Image = null; // or default
+                    //pbPersonImage.Image = null; // or default
+                    if (radioButton1.Checked)
+                        pbPersonImage.Image = Properties.Resources.Male_512;
+                    else if (radioButton2.Checked)
+                        pbPersonImage.Image = Properties.Resources.Female_512;
                 }
+            }
+            else
+            {
+                //pbPersonImage.Image = null; // or default
+                if (radioButton1.Checked)
+                    pbPersonImage.Image = Properties.Resources.Male_512;
+                else if (radioButton2.Checked)
+                    pbPersonImage.Image = Properties.Resources.Female_512;
             }
 
 

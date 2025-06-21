@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -135,7 +136,7 @@ namespace DVLDPresentationLayer
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddEditPerson frmEdit = new frmAddEditPerson((int)dgvAllPeople.CurrentRow.Cells[0].Value);
+            frmAddEditPerson frmEdit = new frmAddEditPerson( (int)dgvAllPeople.CurrentRow.Cells[0].Value);
             frmEdit.ShowDialog();
 
             _RefreshPeopleList();
@@ -159,6 +160,81 @@ namespace DVLDPresentationLayer
                     e.Handled = true; // Block input
                 }
             }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAllPeople.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a person to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int personID = (int)dgvAllPeople.CurrentRow.Cells[0].Value;
+            clsPerson person = clsPerson.Find(personID);
+
+            if (person == null)
+            {
+                MessageBox.Show("This person does not exist in the system.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete Person[" + personID + "]","Confirm Deletion",
+                MessageBoxButtons.YesNo,MessageBoxIcon.Warning
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                
+
+                // Delete person from database
+                if (clsPerson.DeletePerson(personID))
+                {
+                    _DeletePersonImageIfExists(person.ImagePath);//Delete the Image
+                    MessageBox.Show("Person deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _RefreshPeopleList();
+                }
+                else
+                {
+                    MessageBox.Show("Person was not Deleleted because is has data linked it to.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+        private void _DeletePersonImageIfExists(string imageFileName)
+        {
+            if (!string.IsNullOrEmpty(imageFileName))
+            {
+                string fullImagePath = GetImageFullPath(imageFileName);
+
+                if (File.Exists(fullImagePath))
+                {
+                    try
+                    {
+                        File.Delete(fullImagePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Optional: log or show message
+                        MessageBox.Show("Failed to delete image: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+
+        private string GetImageFullPath(string imageFileName)
+        {
+            string solutionRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\.."));
+            string imagesFolder = Path.Combine(solutionRoot, "DVLDPresentationLayer", "DVLDPeopleImages");
+            return Path.Combine(imagesFolder, imageFileName);
+        }
+
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmShowDetails frm1 = new FrmShowDetails((int)dgvAllPeople.CurrentRow.Cells[0].Value);
+            frm1.ShowDialog();
         }
     }
 }

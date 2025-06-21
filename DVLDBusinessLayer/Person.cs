@@ -119,6 +119,13 @@ namespace DVLDBusinessLayer
 
         }
 
+        public static bool DeletePerson(int ID)
+        {
+            return clsPeopleData.DeletePerson(ID);
+        }
+
+
+
         public static bool isPersonExistByID(int ID)
         {
             return clsPeopleData.IsPersonExistByID(ID);

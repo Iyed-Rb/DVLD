@@ -190,7 +190,7 @@ namespace DVLDDataAccessLayer
                     Phone = (string)reader["Phone"];
                     Address = (string)reader["Address"];
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = (int)reader["Gendor"];
+                    Gendor = Convert.ToInt32(reader["Gendor"]);
                     NationalityCountryID = (int)reader["NationalityCountryID"];
                     if (reader["ImagePath"] != DBNull.Value)
                     {
@@ -332,6 +332,48 @@ namespace DVLDDataAccessLayer
 
             return (rowsAffected > 0);
         }
+
+        public static bool DeletePerson(int PersonID)
+        {
+
+            int rowsAffected = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"Delete People 
+                                where PersonID = @PersonID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+
+                rowsAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+               
+                throw new Exception("Delete failed: " + ex.Message); // ✅ Let the caller handle it
+            
+
+            }
+            finally
+            {
+
+                connection.Close();
+
+            }
+
+            return (rowsAffected > 0);
+
+        }
+
+
+
 
 
         public static bool IsPersonExistByID(int ID)
