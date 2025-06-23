@@ -47,10 +47,14 @@ namespace DVLDPresentationLayer
             dgvAllPeople.ClearSelection();
             dgvAllPeople.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            dgvAllPeople.AllowUserToAddRows = false;
+            dgvAllPeople.ReadOnly = true;
+
+
         }
 
-      
-            //KeyPressEventArgs
+
+        //KeyPressEventArgs
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (_dtPeople == null || comboBox1.SelectedIndex == 0)

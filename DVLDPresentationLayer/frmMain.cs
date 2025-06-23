@@ -22,5 +22,25 @@ namespace DVLDPresentationLayer
             frmManagePeople formManagePeople  = new frmManagePeople();
             formManagePeople.ShowDialog();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmManageUsers FormManageUsers = new FrmManageUsers();
+            FormManageUsers.ShowDialog();
+
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            this.Close();
+            
+        }
     }
 }

@@ -125,7 +125,6 @@ namespace DVLDBusinessLayer
         }
 
 
-
         public static bool isPersonExistByID(int ID)
         {
             return clsPeopleData.IsPersonExistByID(ID);
