@@ -1,4 +1,5 @@
 ﻿using DVLDBusinessLayer;
+using DVLDPresentationLayer.Applications;
 using DVLDPresentationLayer.Users;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,12 @@ namespace DVLDPresentationLayer
         {
             frmChangePassword frmChangePassword = new frmChangePassword(clsGlobalSettings.CurrentUser.UserID);
             frmChangePassword.ShowDialog();
+        }
+
+        private void manageApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmManageApplicationsTypes frmManageApplicationsTypes = new FrmManageApplicationsTypes();
+            frmManageApplicationsTypes.ShowDialog();
         }
     }
 }

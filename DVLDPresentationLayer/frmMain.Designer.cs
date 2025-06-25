@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.applicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drivingLicencesTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detainLicencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageApplicationsTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managesTestTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.peopleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.driversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,11 +66,53 @@
             // 
             // applicationsToolStripMenuItem
             // 
+            this.applicationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.drivingLicencesTypesToolStripMenuItem,
+            this.manageApplicationsToolStripMenuItem,
+            this.detainLicencesToolStripMenuItem,
+            this.manageApplicationsTypesToolStripMenuItem,
+            this.managesTestTypesToolStripMenuItem});
             this.applicationsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.applicationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("applicationsToolStripMenuItem.Image")));
             this.applicationsToolStripMenuItem.Name = "applicationsToolStripMenuItem";
             this.applicationsToolStripMenuItem.Size = new System.Drawing.Size(161, 52);
             this.applicationsToolStripMenuItem.Text = "Applications";
+            // 
+            // drivingLicencesTypesToolStripMenuItem
+            // 
+            this.drivingLicencesTypesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("drivingLicencesTypesToolStripMenuItem.Image")));
+            this.drivingLicencesTypesToolStripMenuItem.Name = "drivingLicencesTypesToolStripMenuItem";
+            this.drivingLicencesTypesToolStripMenuItem.Size = new System.Drawing.Size(312, 54);
+            this.drivingLicencesTypesToolStripMenuItem.Text = "Driving Licences Services";
+            // 
+            // manageApplicationsToolStripMenuItem
+            // 
+            this.manageApplicationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageApplicationsToolStripMenuItem.Image")));
+            this.manageApplicationsToolStripMenuItem.Name = "manageApplicationsToolStripMenuItem";
+            this.manageApplicationsToolStripMenuItem.Size = new System.Drawing.Size(312, 54);
+            this.manageApplicationsToolStripMenuItem.Text = "Manage Applications";
+            this.manageApplicationsToolStripMenuItem.Click += new System.EventHandler(this.manageApplicationsToolStripMenuItem_Click);
+            // 
+            // detainLicencesToolStripMenuItem
+            // 
+            this.detainLicencesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("detainLicencesToolStripMenuItem.Image")));
+            this.detainLicencesToolStripMenuItem.Name = "detainLicencesToolStripMenuItem";
+            this.detainLicencesToolStripMenuItem.Size = new System.Drawing.Size(312, 54);
+            this.detainLicencesToolStripMenuItem.Text = "Detain Licences";
+            // 
+            // manageApplicationsTypesToolStripMenuItem
+            // 
+            this.manageApplicationsTypesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageApplicationsTypesToolStripMenuItem.Image")));
+            this.manageApplicationsTypesToolStripMenuItem.Name = "manageApplicationsTypesToolStripMenuItem";
+            this.manageApplicationsTypesToolStripMenuItem.Size = new System.Drawing.Size(312, 54);
+            this.manageApplicationsTypesToolStripMenuItem.Text = "Manage Applications Types";
+            // 
+            // managesTestTypesToolStripMenuItem
+            // 
+            this.managesTestTypesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("managesTestTypesToolStripMenuItem.Image")));
+            this.managesTestTypesToolStripMenuItem.Name = "managesTestTypesToolStripMenuItem";
+            this.managesTestTypesToolStripMenuItem.Size = new System.Drawing.Size(312, 54);
+            this.managesTestTypesToolStripMenuItem.Text = "Manages Test Types";
             // 
             // peopleToolStripMenuItem
             // 
@@ -110,7 +157,7 @@
             // 
             this.currentUserInfoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("currentUserInfoToolStripMenuItem.Image")));
             this.currentUserInfoToolStripMenuItem.Name = "currentUserInfoToolStripMenuItem";
-            this.currentUserInfoToolStripMenuItem.Size = new System.Drawing.Size(240, 54);
+            this.currentUserInfoToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.currentUserInfoToolStripMenuItem.Text = "Current User Info";
             this.currentUserInfoToolStripMenuItem.Click += new System.EventHandler(this.currentUserInfoToolStripMenuItem_Click);
             // 
@@ -118,20 +165,20 @@
             // 
             this.changeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeToolStripMenuItem.Image")));
             this.changeToolStripMenuItem.Name = "changeToolStripMenuItem";
-            this.changeToolStripMenuItem.Size = new System.Drawing.Size(240, 54);
+            this.changeToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.changeToolStripMenuItem.Text = "Change Password";
             this.changeToolStripMenuItem.Click += new System.EventHandler(this.changeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(237, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(205, 6);
             // 
             // signOutToolStripMenuItem
             // 
             this.signOutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("signOutToolStripMenuItem.Image")));
             this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(240, 54);
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.signOutToolStripMenuItem.Text = "Sign Out";
             this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
             // 
@@ -173,6 +220,11 @@
         private System.Windows.Forms.ToolStripMenuItem changeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem signOutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drivingLicencesTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageApplicationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem detainLicencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageApplicationsTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem managesTestTypesToolStripMenuItem;
     }
 }
 

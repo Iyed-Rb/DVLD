@@ -111,17 +111,8 @@ namespace DVLDBusinessLayer
 
         private bool _UpdateUser()
         {
-            //call DataAccess Layer 
-
             return clsUsersData.UpdateUser(this.UserID, this.PersonID, this.UserName, this.Password, this.IsActive);
-
-            //// Call DataAccess Layer
-            //bool result = clsUsersData.UpdateUser(this.UserID, this.PersonID, this.UserName, this.Password, this.IsActive);
-
-            //if (!result)
-            //    throw new Exception("Failed to update user.");
-
-            //return true;
+  
         }
 
         public static bool DeleteUser(int UserID)

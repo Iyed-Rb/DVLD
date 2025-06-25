@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applications\frmEditApplicationType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\frmEditApplicationType.Designer.cs">
+      <DependentUpon>frmEditApplicationType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\FrmManageApplicationsTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\FrmManageApplicationsTypes.Designer.cs">
+      <DependentUpon>FrmManageApplicationsTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="ctrlPersonInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +126,12 @@
     <Compile Include="Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Applications\frmEditApplicationType.resx">
+      <DependentUpon>frmEditApplicationType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\FrmManageApplicationsTypes.resx">
+      <DependentUpon>FrmManageApplicationsTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ctrlPersonInformation.resx">
       <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
     </EmbeddedResource>
