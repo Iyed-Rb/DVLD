@@ -110,15 +110,6 @@ namespace DVLDDataAccessLayer
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
                     Gendor = Convert.ToInt32(reader["Gendor"]);
 
-                    //Gendor = (int)reader["Gendor"];
-                    //if (reader["Gendor"] != DBNull.Value)
-                    //    Gendor = (int)reader["Gendor"];
-                    //else
-                    //    Gendor = -1;
-                    //Gendor = reader["Gendor"] != DBNull.Value ?
-                    //        Convert.ToInt32(reader["Gendor"]) :
-                    //         -1;
-
                     NationalityCountryID = (int)reader["NationalityCountryID"];
                     if (reader["ImagePath"] != DBNull.Value)
                     {
@@ -149,7 +140,7 @@ namespace DVLDDataAccessLayer
         }
 
         public static bool GetPersonInfoByNationalNo(ref int ID, string NationalNo,ref string FirstName, ref string SecondName, ref string ThirdName,
-           ref string LastName, ref DateTime DateOfBirth, int Gendor, ref string Address, ref string Phone, ref string Email,
+           ref string LastName, ref DateTime DateOfBirth, ref int Gendor, ref string Address, ref string Phone, ref string Email,
            ref int NationalityCountryID, ref string ImagePath)
         {
             bool isFound = false;

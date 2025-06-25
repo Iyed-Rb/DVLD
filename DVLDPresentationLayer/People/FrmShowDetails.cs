@@ -32,7 +32,7 @@ namespace DVLDPresentationLayer
 
         private void FrmShowDetails_Load(object sender, EventArgs e)
         {
-            ctrlPersonInformation1.LoadData(_PersonID);
+            ctrlPersonInformation1.LoadDataByPersonID(_PersonID);
         }
 
     }

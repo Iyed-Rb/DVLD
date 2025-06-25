@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DVLDBusinessLayer;
+using DVLDPresentationLayer.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,9 +40,19 @@ namespace DVLDPresentationLayer
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
             this.Close();
-            
+        }
+
+        private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserInfo frmUserInfo = new frmUserInfo(clsGlobalSettings.CurrentUser.UserID);
+            frmUserInfo.ShowDialog();
+        }
+
+        private void changeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangePassword frmChangePassword = new frmChangePassword(clsGlobalSettings.CurrentUser.UserID);
+            frmChangePassword.ShowDialog();
         }
     }
 }

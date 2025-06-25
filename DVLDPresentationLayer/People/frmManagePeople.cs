@@ -132,7 +132,7 @@ namespace DVLDPresentationLayer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmAddEditPerson formAddEdit = new frmAddEditPerson(-1);
+            frmAddEditPerson formAddEdit = new frmAddEditPerson();
             formAddEdit.ShowDialog();
 
             _RefreshPeopleList();
@@ -175,7 +175,7 @@ namespace DVLDPresentationLayer
             }
 
             int personID = (int)dgvAllPeople.CurrentRow.Cells[0].Value;
-            clsPerson person = clsPerson.Find(personID);
+            clsPerson person = clsPerson.FindPersonByID(personID);
 
             if (person == null)
             {
@@ -240,6 +240,8 @@ namespace DVLDPresentationLayer
             FrmShowDetails frm1 = new FrmShowDetails((int)dgvAllPeople.CurrentRow.Cells[0].Value);
             frm1.ShowDialog();
         }
+
+
     }
 }
 

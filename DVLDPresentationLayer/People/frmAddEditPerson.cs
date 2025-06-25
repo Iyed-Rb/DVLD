@@ -22,6 +22,8 @@ namespace DVLDPresentationLayer
         int _PersonID;
         clsPerson _Person;
 
+
+       
         public frmAddEditPerson(int PersonID)
         {
             InitializeComponent();
@@ -118,7 +120,7 @@ namespace DVLDPresentationLayer
                 return;
             }
 
-            _Person = clsPerson.Find(_PersonID);
+            _Person = clsPerson.FindPersonByID(_PersonID);
 
             if (_Person == null)
             {
@@ -282,6 +284,9 @@ namespace DVLDPresentationLayer
             }
         }
 
+
+        public delegate void DataBackEventHandler(object sender, int PersonID);
+        public event DataBackEventHandler DataBack;
         private void btSave_Click(object sender, EventArgs e)
         {
 
@@ -343,6 +348,8 @@ namespace DVLDPresentationLayer
             _Mode = enMode.Update;
             lbMode.Text = "Update Person";
             lbPersonID.Text = _Person.PersonID.ToString();
+
+            DataBack?.Invoke(this, _Person.PersonID); // Notify subscribers with the new PersonID
             
 
         }
@@ -397,5 +404,103 @@ namespace DVLDPresentationLayer
 
 
 
+        private void txtFirstName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                txtLastName.Focus();          // move focus to password field
+            }
+        }
+
+        private void txtSecondName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                txtThirdName.Focus();          // move focus to password field
+            }
+        }
+
+        private void txtThirdName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                txtLastName.Focus();          // move focus to password field
+            }
+        }
+
+        private void txtLastName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                txtNationalNo.Focus();          // move focus to password field
+            }
+        }
+
+        private void txtNationalNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                dateTimePicker1.Focus();          // move focus to password field
+            }
+        }
+
+        private void radioButton1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                txtPhone.Focus();          // move focus to password field
+            }
+        }
+
+        private void txtPhone_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                txtEmail.Focus();          // move focus to password field
+            }
+        }
+
+        private void txtEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                cbCountry.Focus();          // move focus to password field
+            }
+        }
+
+        private void dateTimePicker1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                radioButton1.Focus();          // move focus to password field
+            }
+        }
+
+        private void cbCountry_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                txtAddress.Focus();          // move focus to password field
+            }
+        }
+
+        private void txtAddress_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // prevent beep sound
+                btSave.Focus();          // move focus to password field
+            }
+        }
     }
 }

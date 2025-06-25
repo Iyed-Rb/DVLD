@@ -72,7 +72,7 @@ namespace DVLDBusinessLayer
             Mode = enMode.Update;
         }
 
-        public static clsPerson Find(int ID)
+        public static clsPerson FindPersonByID(int ID)
         {
 
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Email = "", Phone = "", Address = "",
@@ -90,6 +90,27 @@ namespace DVLDBusinessLayer
             else
                 return null;
         }
+
+        public static clsPerson FindPersonByNationalNO(string NationalNo)
+        {
+            int ID = -1;
+            string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Email = "", Phone = "", Address = "",
+             ImagePath = "";
+            DateTime DateOfBirth = DateTime.Now;
+            int NationalityCountryID = -1;
+            int Gendor = -1;
+
+            if (clsPeopleData.GetPersonInfoByNationalNo(ref ID, NationalNo, ref FirstName, ref SecondName,
+            ref ThirdName, ref LastName, ref DateOfBirth, ref Gendor, ref Address, ref Phone, ref Email,
+            ref NationalityCountryID, ref ImagePath))
+
+                return new clsPerson(ID, NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth,
+                      Gendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+            else
+                return null;
+        }
+
+
 
         private bool _AddNewPerson()
         {

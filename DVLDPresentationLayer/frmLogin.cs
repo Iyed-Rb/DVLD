@@ -36,7 +36,7 @@ namespace DVLDPresentationLayer
                    else
                    {
 
-                        clsGlobalSettings.CurrentUser = clsUser.Find(textBox1.Text);
+                        clsGlobalSettings.CurrentUser = clsUser.FindUserByUsername(textBox1.Text);
 
                         if (checkBox1.Checked == true)
                        {

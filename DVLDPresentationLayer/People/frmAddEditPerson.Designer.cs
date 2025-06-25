@@ -145,6 +145,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(130, 20);
             this.txtFirstName.TabIndex = 5;
+            this.txtFirstName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFirstName_KeyDown);
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
             // 
             // txtSecondName
@@ -153,6 +154,7 @@
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(130, 20);
             this.txtSecondName.TabIndex = 6;
+            this.txtSecondName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSecondName_KeyDown);
             // 
             // txtLastName
             // 
@@ -160,6 +162,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(130, 20);
             this.txtLastName.TabIndex = 7;
+            this.txtLastName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLastName_KeyDown);
             this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
             // 
             // txtThirdName
@@ -168,6 +171,7 @@
             this.txtThirdName.Name = "txtThirdName";
             this.txtThirdName.Size = new System.Drawing.Size(130, 20);
             this.txtThirdName.TabIndex = 8;
+            this.txtThirdName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtThirdName_KeyDown);
             // 
             // txtNationalNo
             // 
@@ -175,6 +179,7 @@
             this.txtNationalNo.Name = "txtNationalNo";
             this.txtNationalNo.Size = new System.Drawing.Size(130, 20);
             this.txtNationalNo.TabIndex = 9;
+            this.txtNationalNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNationalNo_KeyDown);
             this.txtNationalNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtNationalNo_Validating);
             // 
             // txtEmail
@@ -183,6 +188,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(130, 20);
             this.txtEmail.TabIndex = 10;
+            this.txtEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmail_KeyDown);
             this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // txtAddress
@@ -192,6 +198,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(412, 59);
             this.txtAddress.TabIndex = 11;
+            this.txtAddress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAddress_KeyDown);
             this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this.txtAddress_Validating);
             // 
             // pictureBox1
@@ -341,6 +348,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(140, 20);
             this.txtPhone.TabIndex = 28;
+            this.txtPhone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPhone_KeyDown);
             this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this.txtPhone_Validating);
             // 
             // lbPersonID
@@ -365,6 +373,7 @@
             this.radioButton1.Text = "Male";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.Gender_CheckedChanged);
+            this.radioButton1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.radioButton1_KeyDown);
             // 
             // radioButton2
             // 
@@ -406,12 +415,13 @@
             this.cbCountry.Size = new System.Drawing.Size(140, 21);
             this.cbCountry.TabIndex = 37;
             this.cbCountry.TabStop = false;
+            this.cbCountry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbCountry_KeyDown);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(338, 56);
+            this.label12.Location = new System.Drawing.Point(359, 56);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(59, 18);
             this.label12.TabIndex = 30;
@@ -425,6 +435,7 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(140, 20);
             this.dateTimePicker1.TabIndex = 34;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePicker1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dateTimePicker1_KeyDown);
             // 
             // label13
             // 
