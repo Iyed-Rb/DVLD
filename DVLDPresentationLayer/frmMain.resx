@@ -226,7 +226,7 @@
   <data name="detainLicencesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEEAAAA+CAYAAAB0g3ZRAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAABt5JREFUeF7tm2tsFFUUx7eCoKhQjcFHMTSCYoJB+FAi4KPBCCagVIIGDIYmaFAi
+        DwAACw8BkvkDpQAABt5JREFUeF7tm2tsFFUUx7eCoKhQjcFHMTSCYoJB+FAi4KPBCCagVIIGDIYmaFAi
         pARFDRFrQqIgIWAIJkhwJSGGpEDloeVlGoN+4IM28YU8pCJWrQoo+MDX8fzvzNnOzp7Z3rkzW0jqSX7t
         uf977szc/87Mzs7OZoioS+EoZ7JMKwMBNDI1Wn1i2jPVnVCuDywRHDCghZHJh6nVxiWiPZNlqAjV/FcZ
         mBIc1Ux9gGZGJgwz0A7uEQB7CXSAfLi27FgUN6J0JvgTCE4uSF2oFodDuCZINljvRLQRpTGBozYwgQKU
@@ -296,7 +296,7 @@
   <data name="managesTestTypesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAGh5JREFUeF7VWglwVGW2xm3GN6XOZjnq87mgvBF1AHWGUWRGXzk1peigILLGBUER
+        wQAADsEBuJFr7QAAGh5JREFUeF7VWglwVGW2xm3GN6XOZjnq87mgvBF1AHWGUWRGXzk1peigILLGBUER
         BAIhLLIlIXsgIZAAAZJAQiAL2fcQlpB93/e1O0sv6e4knc6+8L1z/k6HTtI4zzFM1aP46t7+75J7vv+c
         75zz3zsDwL8NEolkZkVFxfzKyso7ory8fH51dfVMU9ffDZgcnG7odLrHvby8Lnz11drOVatWDa9audI0
         Vq0cXrFixfD777+v2b59u49SqfyNqftNJ0wOTif6+/uftLS0rJo9ezbmzp2LefPm4dVXX/1B8DnPPvss

@@ -110,7 +110,7 @@ namespace DVLDPresentationLayer.Applications
             {
                 e.SuppressKeyPress = true; // prevent beep sound
                 txtFees.Focus();     // move focus to password field
-            }
+            } 
         }
 
         private void txtFees_KeyDown(object sender, KeyEventArgs e)

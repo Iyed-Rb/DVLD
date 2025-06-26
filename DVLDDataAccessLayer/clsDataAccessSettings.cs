@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ContactsDataAccessLayer
+namespace DVLDDataAccessLayer
 {
     static class clsDataAccessSettings
     {

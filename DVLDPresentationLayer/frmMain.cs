@@ -61,5 +61,12 @@ namespace DVLDPresentationLayer
             FrmManageApplicationsTypes frmManageApplicationsTypes = new FrmManageApplicationsTypes();
             frmManageApplicationsTypes.ShowDialog();
         }
+
+        private void managesTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTestTypes frmManageTestTypes = new frmManageTestTypes();
+            frmManageTestTypes.ShowDialog();
+  
+        }
     }
 }
