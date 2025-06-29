@@ -30,14 +30,14 @@ namespace DVLDBusinessLayer
         }
         public static DataTable GetAllApplicationsTypes()
         {
-            return clsApplicationsData.GetAllApplicationsTypes();
+            return clsApplicationsTypesData.GetAllApplicationsTypes();
         }
 
         public static clsApplicationTypes FindApplicationTypeByID(int ApplicationTypeID)
         {
             string ApplicationTypeTitle = "";
             decimal ApplicationTypeFees = -1;
-            if (clsApplicationsData.GetApplicationTypeInfoByID(ApplicationTypeID, ref ApplicationTypeTitle, ref ApplicationTypeFees) )     
+            if (clsApplicationsTypesData.GetApplicationTypeInfoByID(ApplicationTypeID, ref ApplicationTypeTitle, ref ApplicationTypeFees) )     
             {
                 return new clsApplicationTypes(ApplicationTypeID, ApplicationTypeTitle, ApplicationTypeFees);
             }
@@ -47,13 +47,13 @@ namespace DVLDBusinessLayer
 
         public bool _UpdateApplicationType()
         {
-            return clsApplicationsData.UpdateApplicationType(this.ApplicationTypeID, this.ApplicationTypeTitle, this.ApplicationTypeFees);
+            return clsApplicationsTypesData.UpdateApplicationType(this.ApplicationTypeID, this.ApplicationTypeTitle, this.ApplicationTypeFees);
 
         }
 
         public static bool IsApplicationTypeTitleExists(string ApplicationTypeTitle)
         {
-            return clsApplicationsData.IsTitleExist(ApplicationTypeTitle);
+            return clsApplicationsTypesData.IsTitleExist(ApplicationTypeTitle);
         }
 
 

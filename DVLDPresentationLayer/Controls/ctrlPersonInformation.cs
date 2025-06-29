@@ -9,14 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DVLDPresentationLayer
 {
     public partial class ctrlPersonInformation : UserControl
     {
-        public int _PersonID = -1;
-        string _NationalNo;
+        public int _PersonID ;
+        public string _NationalNo;
         clsPerson _Person;
 
         public ctrlPersonInformation()
@@ -32,6 +32,9 @@ namespace DVLDPresentationLayer
 
         public void LoadDataByNationalNo(string NationalNo)
         {
+            if (string.IsNullOrWhiteSpace(NationalNo)) return;
+
+
             _NationalNo = NationalNo;
 
             _Person = clsPerson.FindPersonByNationalNO(_NationalNo);
@@ -39,7 +42,7 @@ namespace DVLDPresentationLayer
             if (_Person == null)
             {
 
-                _PersonID = -1;
+   
                 lbPersonID.Text = "[????]";
                 lbName.Text = "[????]";
                 lbNationalNo.Text = "[????]";
@@ -130,13 +133,15 @@ namespace DVLDPresentationLayer
 
         public void LoadDataByPersonID(int PersonID)
         {
+            if (PersonID <= 0) return; // ✅ Prevent auto-load of "PersonID = 0"
+
             _PersonID = PersonID;
 
             _Person = clsPerson.FindPersonByID(_PersonID);
 
             if (_Person == null)
             {
-                _PersonID = -1; // Reset _PersonID if not found
+             
                 lbPersonID.Text = "[????]";
                 lbName.Text = "[????]";
                 lbNationalNo.Text = "[????]";
@@ -229,7 +234,7 @@ namespace DVLDPresentationLayer
         private string GetImageFullPath(string imageFileName)
         {
             // Go up from /bin/Debug to the root of the solution
-            string solutionRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\.."));
+            string solutionRoot = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..\.."));
 
             // Go to DVLDPresentationLayer\DVLDPeopleImages
             string imagesFolder = Path.Combine(solutionRoot, "DVLDPresentationLayer", "DVLDPeopleImages");

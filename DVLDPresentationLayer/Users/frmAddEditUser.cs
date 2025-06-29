@@ -20,7 +20,7 @@ namespace DVLDPresentationLayer
         private enMode _Mode;
 
 
-        int _UserID = -1;
+        int _UserID;
         clsUser _User;
 
 
@@ -43,104 +43,73 @@ namespace DVLDPresentationLayer
 
         private void frmAddEditUser_Load(object sender, EventArgs e)
         {
-       
-            comboBox1.SelectedIndex = 0; // Default to PersonID search
             _LoadData();
             this.AutoValidate = AutoValidate.EnableAllowFocusChange;
         }
 
-        private void btSearchPerson_Click(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedIndex == 0)
-            ctrlPersonInformation1.LoadDataByPersonID( Convert.ToInt32(textBox1.Text) );
-
-            else if (comboBox1.SelectedIndex == 1)
-                ctrlPersonInformation1.LoadDataByNationalNo(textBox1.Text);
-
-           
-          
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (comboBox1.SelectedIndex == 0) // PersonID
-            {
-                // Only allow digits and control keys (like Backspace)
-                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                {
-                    e.Handled = true; // Block input
-                }
-            }
-        }
-
-
-      
         private void _LoadData()
         {
-
             if (_Mode == enMode.AddNew)
             {
                 tbLoginInfo.Enabled = false;
+                ctrlPersonCardWithFilter1.groupBox1.Enabled = true;
                 lbMode.Text = "Add New User";
                 _User = new clsUser();
                 return;
             }
 
             _User = clsUser.FindUserByID(_UserID);
-       
+
             if (_User == null)
             {
                 MessageBox.Show("No User with ID = " + _UserID, "User Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 this.Close();
                 return;
-
             }
 
-            ctrlPersonInformation1.LoadDataByPersonID(_User.PersonID);
+            //ctrlPersonCardWithFilter1.LoadPersonDataByID(_User.PersonID);
+            ctrlPersonCardWithFilter1.SelectedPersonID = _User.PersonID;
+
             tbLoginInfo.Enabled = true;
             tbPersonInfo.Enabled = true;
             btSave.Enabled = true;
 
-            
-            groupBox1.Enabled = false;
+            ctrlPersonCardWithFilter1.groupBox1.Enabled = false;
 
 
             lbMode.Text = "Update User";
 
-            lbUserID.Text = _User.UserID.ToString(); 
+            lbUserID.Text = _User.UserID.ToString();
             txtUserName.Text = _User.UserName;
             txtPassword.Text = _User.Password;
             txtConfirmPassword.Text = _User.Password;
             ChkBoxIsActive.Checked = _User.IsActive;
-
         }
 
+        int _PersonID;
+        clsPerson _Person;
         private void btNext_Click(object sender, EventArgs e)
         {
-         
-
             if (_Mode == enMode.Update)
             {
                 btSave.Enabled = true;
                 tbLoginInfo.Enabled = true;
                 tabControl1.SelectedTab = tabControl1.TabPages["tbLoginInfo"];
-
                 return;
             }
 
-            if (ctrlPersonInformation1._PersonID == -1)
+             _PersonID = ctrlPersonCardWithFilter1.SelectedPersonID;
+            _Person = clsPerson.FindPersonByID(_PersonID);
+
+            
+
+            if (_PersonID == -1 || _Person == null)
             {
                 MessageBox.Show("Please select a valid person first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (clsUser.IsUserExistByPersonID(ctrlPersonInformation1._PersonID))
+            if (clsUser.IsUserExistByPersonID(_PersonID))
             {
                 MessageBox.Show("Selected Person already has a User. Choose another one.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -149,20 +118,19 @@ namespace DVLDPresentationLayer
             btSave.Enabled = true;
             tbLoginInfo.Enabled = true;
             tabControl1.SelectedTab = tabControl1.TabPages["tbLoginInfo"];
-
         }
+
 
 
 
         private void btSave_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren())
-                return; // 🔁 Stop if any validation fails
-
+                return;
 
             _User.UserName = txtUserName.Text.Trim();
             _User.Password = txtPassword.Text.Trim();
-            _User.PersonID = ctrlPersonInformation1._PersonID;
+            _User.PersonID = _PersonID;
             _User.IsActive = ChkBoxIsActive.Checked;
 
             if (_User.Save())
@@ -174,6 +142,7 @@ namespace DVLDPresentationLayer
             lbMode.Text = "Update User";
             lbUserID.Text = _User.UserID.ToString();
         }
+
 
         private void txtUserName_Validating(object sender, CancelEventArgs e)
         {
@@ -262,21 +231,7 @@ namespace DVLDPresentationLayer
             this.Close();
         }
 
-        private void btAddPerson_Click(object sender, EventArgs e)
-        {
-            frmAddEditPerson frmAddEditPerson = new frmAddEditPerson();
-
-            frmAddEditPerson.DataBack += GetPersonID; // Subscribe to the event
-
-            frmAddEditPerson.ShowDialog();
-        }
-
-        private void GetPersonID(object sender, int PersonID)
-        {
-            ctrlPersonInformation1._PersonID = PersonID;
-            ctrlPersonInformation1.LoadDataByPersonID(ctrlPersonInformation1._PersonID);
-        }
-
+      
         private void txtUserName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -307,5 +262,8 @@ namespace DVLDPresentationLayer
                 errorProvider1.SetError(txtConfirmPassword, null);
             };
         }
+
+
+
     }
 }

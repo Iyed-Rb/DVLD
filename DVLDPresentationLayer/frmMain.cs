@@ -58,8 +58,7 @@ namespace DVLDPresentationLayer
 
         private void manageApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmManageApplicationsTypes frmManageApplicationsTypes = new FrmManageApplicationsTypes();
-            frmManageApplicationsTypes.ShowDialog();
+            
         }
 
         private void managesTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,6 +66,12 @@ namespace DVLDPresentationLayer
             frmManageTestTypes frmManageTestTypes = new frmManageTestTypes();
             frmManageTestTypes.ShowDialog();
   
+        }
+
+        private void localDrivingLicenceApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageLDLApplications frm = new frmManageLDLApplications();
+            frm.ShowDialog();
         }
     }
 }

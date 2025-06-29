@@ -19,7 +19,7 @@ namespace DVLDPresentationLayer
             InitializeComponent();
         }
 
-        string loginFilePath = Path.Combine(Application.StartupPath, "userlogin.txt");
+        string loginFilePath = Path.Combine(System.Windows.Forms.Application.StartupPath, "userlogin.txt");
 
         private void PerformClick()
         {

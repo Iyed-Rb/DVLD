@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DVLDPresentationLayer
 {
@@ -20,8 +21,6 @@ namespace DVLDPresentationLayer
         {
             InitializeComponent();
         }
-
-
 
         public void LoadUserDataByID(int UserID)
         {
@@ -64,6 +63,11 @@ namespace DVLDPresentationLayer
             //lbIsActive.Text = _User.IsActive ? "Yes" : "No";
 
             //this.AutoValidate = AutoValidate.EnableAllowFocusChange;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

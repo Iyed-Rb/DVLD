@@ -190,7 +190,7 @@ namespace DVLDPresentationLayer
         private string GetImageFullPath(string imageFileName)
         {
             // Go up from /bin/Debug to the root of the solution
-            string solutionRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\.."));
+            string solutionRoot = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..\.."));
 
             // Go to DVLDPresentationLayer\DVLDPeopleImages
             string imagesFolder = Path.Combine(solutionRoot, "DVLDPresentationLayer", "DVLDPeopleImages");
@@ -324,7 +324,7 @@ namespace DVLDPresentationLayer
                     {
                         pbPersonImage.Image.Dispose(); // Fully releases the file
                         pbPersonImage.Image = null;
-                        Application.DoEvents(); // Allow UI to process release
+                        System.Windows.Forms.Application.DoEvents(); // Allow UI to process release
                     }
 
                     if (File.Exists(oldImageFullPath))
@@ -363,7 +363,7 @@ namespace DVLDPresentationLayer
             string imageFileName = Guid.NewGuid().ToString() + Path.GetExtension(sourceImagePath);
 
             // Get the path to the DVLDPresentationLayer\DVLDPeopleImages folder
-            string solutionRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\.."));
+            string solutionRoot = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..\.."));
             string imagesFolderPath = Path.Combine(solutionRoot, "DVLDPresentationLayer", "DVLDPeopleImages");
 
             // Ensure the folder exists

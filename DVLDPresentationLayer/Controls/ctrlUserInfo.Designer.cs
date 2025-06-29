@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbUserID = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lbUsername = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.lbIsActive = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbUserID = new System.Windows.Forms.Label();
+            this.lbUsername = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.ctrlPersonInformation1 = new DVLDPresentationLayer.ctrlPersonInformation();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +54,17 @@
             this.groupBox1.TabIndex = 44;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login Information";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lbIsActive
+            // 
+            this.lbIsActive.AutoSize = true;
+            this.lbIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbIsActive.Location = new System.Drawing.Point(562, 35);
+            this.lbIsActive.Name = "lbIsActive";
+            this.lbIsActive.Size = new System.Drawing.Size(44, 18);
+            this.lbIsActive.TabIndex = 55;
+            this.lbIsActive.Text = "????";
             // 
             // label1
             // 
@@ -65,6 +76,16 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "User ID:";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(480, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 18);
+            this.label2.TabIndex = 54;
+            this.label2.Text = "Is Active:";
+            // 
             // lbUserID
             // 
             this.lbUserID.AutoSize = true;
@@ -74,16 +95,6 @@
             this.lbUserID.Size = new System.Drawing.Size(23, 18);
             this.lbUserID.TabIndex = 51;
             this.lbUserID.Text = "-1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(237, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 18);
-            this.label3.TabIndex = 52;
-            this.label3.Text = "Username:";
             // 
             // lbUsername
             // 
@@ -95,25 +106,15 @@
             this.lbUsername.TabIndex = 53;
             this.lbUsername.Text = "????";
             // 
-            // label2
+            // label3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(480, 35);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 18);
-            this.label2.TabIndex = 54;
-            this.label2.Text = "Is Active:";
-            // 
-            // lbIsActive
-            // 
-            this.lbIsActive.AutoSize = true;
-            this.lbIsActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIsActive.Location = new System.Drawing.Point(562, 35);
-            this.lbIsActive.Name = "lbIsActive";
-            this.lbIsActive.Size = new System.Drawing.Size(44, 18);
-            this.lbIsActive.TabIndex = 55;
-            this.lbIsActive.Text = "????";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(237, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 18);
+            this.label3.TabIndex = 52;
+            this.label3.Text = "Username:";
             // 
             // ctrlPersonInformation1
             // 

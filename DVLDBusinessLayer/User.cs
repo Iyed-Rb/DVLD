@@ -124,7 +124,6 @@ namespace DVLDBusinessLayer
         public bool Save()
         {
 
-
             switch (Mode)
             {
                 case enMode.AddNew:
@@ -148,35 +147,7 @@ namespace DVLDBusinessLayer
             return false;
         }
 
-        //public bool Save()
-        //{
-        //    switch (Mode)
-        //    {
-        //        case enMode.AddNew:
-        //            if (_AddNewUser())
-        //            {
-        //                Mode = enMode.Update;
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("Failed to add new user.");
-        //            }
-
-        //        case enMode.Update:
-        //            if (_UpdateUser())
-        //            {
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("Failed to update user.");
-        //            }
-
-        //        default:
-        //            throw new InvalidOperationException("Invalid mode in Save(): " + Mode);
-        //    }
-        //}
+  
 
 
     }

@@ -46,40 +46,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applications\frmEditApplicationType.cs">
+    <Compile Include="AddEditLDLApplications.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\frmEditApplicationType.Designer.cs">
+    <Compile Include="AddEditLDLApplications.Designer.cs">
+      <DependentUpon>AddEditLDLApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationsTypes\frmEditApplicationType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationsTypes\frmEditApplicationType.Designer.cs">
       <DependentUpon>frmEditApplicationType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Applications\FrmManageApplicationsTypes.cs">
+    <Compile Include="ApplicationsTypes\FrmManageApplicationsTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\FrmManageApplicationsTypes.Designer.cs">
+    <Compile Include="ApplicationsTypes\FrmManageApplicationsTypes.Designer.cs">
       <DependentUpon>FrmManageApplicationsTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="ctrlPersonInformation.cs">
+    <Compile Include="Controls\ctrlPersonInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctrlPersonInformation.Designer.cs">
+    <Compile Include="Controls\ctrlPersonInformation.Designer.cs">
       <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="ctrlUserInfo.cs">
+    <Compile Include="Controls\ctrlUserInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctrlUserInfo.Designer.cs">
+    <Compile Include="Controls\ctrlUserInfo.Designer.cs">
       <DependentUpon>ctrlUserInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEditTestTypes.cs">
+    <Compile Include="frmManageLDLApplications.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditTestTypes.Designer.cs">
+    <Compile Include="frmManageLDLApplications.Designer.cs">
+      <DependentUpon>frmManageLDLApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PersonCardWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PersonCardWithFilter.Designer.cs">
+      <DependentUpon>PersonCardWithFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestsTypes\frmEditTestTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestsTypes\frmEditTestTypes.Designer.cs">
       <DependentUpon>frmEditTestTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmManageTestTypes.cs">
+    <Compile Include="TestsTypes\frmManageTestTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmManageTestTypes.Designer.cs">
+    <Compile Include="TestsTypes\frmManageTestTypes.Designer.cs">
       <DependentUpon>frmManageTestTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="People\frmAddEditPerson.cs">
@@ -138,22 +156,31 @@
     <Compile Include="Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Applications\frmEditApplicationType.resx">
+    <EmbeddedResource Include="AddEditLDLApplications.resx">
+      <DependentUpon>AddEditLDLApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ApplicationsTypes\frmEditApplicationType.resx">
       <DependentUpon>frmEditApplicationType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Applications\FrmManageApplicationsTypes.resx">
+    <EmbeddedResource Include="ApplicationsTypes\FrmManageApplicationsTypes.resx">
       <DependentUpon>FrmManageApplicationsTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ctrlPersonInformation.resx">
+    <EmbeddedResource Include="Controls\ctrlPersonInformation.resx">
       <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ctrlUserInfo.resx">
+    <EmbeddedResource Include="Controls\ctrlUserInfo.resx">
       <DependentUpon>ctrlUserInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditTestTypes.resx">
+    <EmbeddedResource Include="frmManageLDLApplications.resx">
+      <DependentUpon>frmManageLDLApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PersonCardWithFilter.resx">
+      <DependentUpon>PersonCardWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestsTypes\frmEditTestTypes.resx">
       <DependentUpon>frmEditTestTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmManageTestTypes.resx">
+    <EmbeddedResource Include="TestsTypes\frmManageTestTypes.resx">
       <DependentUpon>frmManageTestTypes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\frmAddEditPerson.resx">

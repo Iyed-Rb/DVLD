@@ -34,7 +34,6 @@ namespace DVLDPresentationLayer
             dgvAllUsers.Columns["FullName"].Width = 220;
             dgvAllUsers.Columns["Username"].Width = 100;
             dgvAllUsers.Columns["IsActive"].Width = 85;
-
         }
         private void FrmManageUsers_Load(object sender, EventArgs e)
         {

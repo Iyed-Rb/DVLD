@@ -230,7 +230,7 @@ namespace DVLDPresentationLayer
 
         private string GetImageFullPath(string imageFileName)
         {
-            string solutionRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\.."));
+            string solutionRoot = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..\.."));
             string imagesFolder = Path.Combine(solutionRoot, "DVLDPresentationLayer", "DVLDPeopleImages");
             return Path.Combine(imagesFolder, imageFileName);
         }

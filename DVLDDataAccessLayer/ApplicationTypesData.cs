@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DVLDDataAccessLayer
 {
-    public class clsApplicationsData
+    public class clsApplicationsTypesData
     {
 
         public static DataTable GetAllApplicationsTypes()
@@ -86,7 +86,7 @@ namespace DVLDDataAccessLayer
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Error in GetPersonInfoByID: " + ex.Message);
+                
                 throw new Exception("Error" + ex);
                 isFound = false;
 
