@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.CodeDom;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLDDataAccessLayer
 {
@@ -126,7 +127,7 @@ namespace DVLDDataAccessLayer
         }
 
         public static int AddNewApplication(int ApplicantPersonID, DateTime ApplicationDate, int ApplicationTypeID,
-          int ApplicationStatusID, DateTime LastStatusDate,  decimal PaidFees, int CreatedByUserID)
+          int ApplicationStatus, DateTime LastStatusDate,  decimal PaidFees, int CreatedByUserID)
         {
             int ApplicationID = -1;
 
@@ -134,9 +135,9 @@ namespace DVLDDataAccessLayer
 
             string query = @"
         INSERT INTO Applications 
-        (ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatusID, LastStatusDate, PaidFees, CreatedByUserID)
+        (ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID)
         VALUES 
-        (@ApplicantPersonID, @ApplicationDate, @ApplicationTypeID, @ApplicationStatusID, @LastStatusDate, @PaidFees, @CreatedByUserID);
+        (@ApplicantPersonID, @ApplicationDate, @ApplicationTypeID, @ApplicationStatus, @LastStatusDate, @PaidFees, @CreatedByUserID);
 
         SELECT SCOPE_IDENTITY();";
 
@@ -145,7 +146,7 @@ namespace DVLDDataAccessLayer
             command.Parameters.AddWithValue("@ApplicantPersonID", ApplicantPersonID);
             command.Parameters.AddWithValue("@ApplicationDate", ApplicationDate);
             command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
-            command.Parameters.AddWithValue("@ApplicationStatusID", ApplicationStatusID);
+            command.Parameters.AddWithValue("@ApplicationStatus", ApplicationStatus);
             command.Parameters.AddWithValue("@LastStatusDate", LastStatusDate);
             command.Parameters.AddWithValue("@PaidFees",PaidFees);
             command.Parameters.AddWithValue("@CreatedByUserID",CreatedByUserID);
@@ -175,7 +176,7 @@ namespace DVLDDataAccessLayer
         }
 
         public static bool UpdateApplication(int ApplicationID, int ApplicantPersonID, DateTime ApplicationDate,
-         int ApplicationTypeID, int ApplicationStatusID, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserID)
+         int ApplicationTypeID, int ApplicationStatus, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserID)
         {
             int rowsAffected = 0;
 
@@ -185,8 +186,8 @@ namespace DVLDDataAccessLayer
                      SET ApplicantPersonID = @ApplicantPersonID,
                          ApplicationDate = @ApplicationDate,
                          ApplicationTypeID = @ApplicationTypeID,
-                         ApplicationStatusID = @ApplicationStatusID,
-                         LastStatusDate = @LastStatusDate,
+                         ApplicationStatus = @ApplicationStatus,
+                         LastStatusDate = GETDATE(),
                          PaidFees = @PaidFees,
                          CreatedByUserID = @CreatedByUserID
                      WHERE ApplicationID = @ApplicationID";
@@ -196,8 +197,7 @@ namespace DVLDDataAccessLayer
             command.Parameters.AddWithValue("@ApplicantPersonID", ApplicantPersonID);
             command.Parameters.AddWithValue("@ApplicationDate", ApplicationDate);
             command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
-            command.Parameters.AddWithValue("@ApplicationStatusID", ApplicationStatusID);
-            command.Parameters.AddWithValue("@LastStatusDate", LastStatusDate);
+            command.Parameters.AddWithValue("@ApplicationStatus", ApplicationStatus);
             command.Parameters.AddWithValue("@PaidFees", PaidFees);
             command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
             command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
@@ -289,7 +289,34 @@ namespace DVLDDataAccessLayer
             return existingApplicationID;
         }
 
+        public static bool CancelApplication(int ApplicationID)
+        {
+            int rowsAffected = 0;
 
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "UPDATE Applications SET ApplicationStatus = 2, LastStatusDate = GETDATE() WHERE ApplicationID = @ApplicationID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+ 
+            command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (rowsAffected > 0);
+        }
     }
 
 }

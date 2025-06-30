@@ -19,7 +19,7 @@ namespace DVLDBusinessLayer
         public int ApplicantPersonID { get; set; }
         public DateTime ApplicationDate { get; set; }
         public int ApplicationTypeID { get; set; }
-        public int ApplicationStatusID { get; set; }
+        public int ApplicationStatus { get; set; }
 
         public DateTime LastStatusDate { get; set; }
         public decimal PaidFees { get; set; }
@@ -31,20 +31,21 @@ namespace DVLDBusinessLayer
             ApplicantPersonID = -1;
             ApplicationDate = DateTime.MinValue;
             ApplicationTypeID = -1;
-            ApplicationStatusID = -1;
+            ApplicationStatus = -1;
             LastStatusDate = DateTime.MinValue;
             PaidFees = -1;
             CreatedByUserID = -1;
+            Mode = enMode.AddNew;
         }
 
         private clsApplication(int ApplicationID, int ApplicantPersonID, DateTime ApplicationDate,
-            int ApplicationTypeID, int ApplicationStatusID, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserID)
+            int ApplicationTypeID, int ApplicationStatus, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserID)
         {
             this.ApplicationID = ApplicationID;
             this.ApplicantPersonID = ApplicantPersonID;
             this.ApplicationDate = ApplicationDate;
             this.ApplicationTypeID = ApplicationTypeID;
-            this.ApplicationStatusID = ApplicationStatusID;
+            this.ApplicationStatus = ApplicationStatus;
             this.LastStatusDate = LastStatusDate;
             this.PaidFees = PaidFees;
             this.CreatedByUserID = CreatedByUserID;
@@ -103,7 +104,7 @@ namespace DVLDBusinessLayer
             //call DataAccess Layer 
 
             this.ApplicationID = clsApplicationsData.AddNewApplication(this.ApplicantPersonID, this.ApplicationDate, this.ApplicationTypeID,
-              this.ApplicationStatusID, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
+              this.ApplicationStatus, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
 
             return (this.ApplicationID != -1);
         }
@@ -111,7 +112,7 @@ namespace DVLDBusinessLayer
         private bool _UpdateApplication()
         {
             return clsApplicationsData.UpdateApplication(this.ApplicationID, this.ApplicantPersonID, this.ApplicationDate,
-                this.ApplicationTypeID, this.ApplicationStatusID, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
+                this.ApplicationTypeID, this.ApplicationStatus, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
         }
 
         public static bool DeleteApplication(int ApplicationID)
@@ -123,6 +124,13 @@ namespace DVLDBusinessLayer
         public static int HasSameApplicationBefore(int PersonID, int LicenseClassID)
         {
             return clsApplicationsData.GetExistingApplicationID(PersonID, LicenseClassID);
+        }
+
+        public static bool CancelApplication(int ApplicationID)
+        {
+
+            return clsApplicationsData.CancelApplication(ApplicationID);
+
         }
 
         public bool Save()

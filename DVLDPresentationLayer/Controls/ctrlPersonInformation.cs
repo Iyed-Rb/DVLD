@@ -42,7 +42,6 @@ namespace DVLDPresentationLayer
             if (_Person == null)
             {
 
-   
                 lbPersonID.Text = "[????]";
                 lbName.Text = "[????]";
                 lbNationalNo.Text = "[????]";
@@ -54,6 +53,9 @@ namespace DVLDPresentationLayer
                 lbCountry.Text = "[????]";
                 pbPersonImage.Image = Properties.Resources.Male_512;
                 MessageBox.Show("No Person with National No = " + _NationalNo, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _PersonID = -1;
+                _NationalNo = "";
+                _Person = null;
                 return;
 
             }
@@ -141,7 +143,6 @@ namespace DVLDPresentationLayer
 
             if (_Person == null)
             {
-             
                 lbPersonID.Text = "[????]";
                 lbName.Text = "[????]";
                 lbNationalNo.Text = "[????]";
@@ -153,6 +154,9 @@ namespace DVLDPresentationLayer
                 lbCountry.Text = "[????]";
                 pbPersonImage.Image = Properties.Resources.Male_512;
                 MessageBox.Show("No Person with ID = " + _PersonID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _PersonID = -1;
+                _Person = null;
+                _NationalNo = "";
                 return; 
                 
             }

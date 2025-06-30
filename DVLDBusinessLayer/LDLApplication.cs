@@ -28,6 +28,7 @@ namespace DVLDBusinessLayer
             this.LDLApplicationID = -1;
             this.Application = new clsApplication();
             this.LicenseClass = new clsLicenseClass();
+            Mode = enMode.AddNew;
         }
 
         private clsLDLApplication(int ldlApplicationID, clsApplication Application, clsLicenseClass licenseClass)
@@ -35,6 +36,7 @@ namespace DVLDBusinessLayer
             this.LDLApplicationID = ldlApplicationID;
             this.Application = Application;
             this.LicenseClass = licenseClass;
+            Mode = enMode.Update;
         }
 
 
@@ -74,23 +76,25 @@ namespace DVLDBusinessLayer
 
         private bool _UpdateLDLApplication()
         {
-            return clsLDLApplicationData.UpdateLDLApplication(this.LDLApplicationID, Application.ApplicationID, LicenseClass.LicenseClassID);
+            return clsLDLApplicationData.UpdateLDLApplication(this.LDLApplicationID, this.Application.ApplicationID, this.LicenseClass.LicenseClassID);
         }
 
         public static bool DeleteLDLApplication(int LDLApplicationID)
-        { 
+        {
 
             clsLDLApplication LDL = FindLDLApplicationByID(LDLApplicationID);
 
             if (LDL == null)
                 return false;
 
-            // 2. Delete the Application first
-            if (!clsApplication.DeleteApplication(LDL.Application.ApplicationID))
+            // 1. Delete the LDL application first (child)
+            if (!clsLDLApplicationData.DeleteLDLApplication(LDLApplicationID))
                 return false;
 
-            // 3. Then delete the LDL application
-            return clsLDLApplicationData.DeleteLDLApplication(LDLApplicationID);
+            // 2. Then delete the related application (parent)
+            return clsApplication.DeleteApplication(LDL.Application.ApplicationID);
+
+
         } 
         public static bool HasLDLApplicationBefore(string NationalNo, int LicenseClassID)
         {
@@ -102,26 +106,55 @@ namespace DVLDBusinessLayer
             switch (Mode)
             {
                 case enMode.AddNew:
-                    if (Application.Save()) // Save Application first
-                    {
-                        if (_AddNewLDLApplication())
-                        {
-                            Mode = enMode.Update;
-                            return true;
-                        }
-                    }
-                    return false;
+                    if (!Application.Save())
+                        throw new Exception("Failed to save Application.");
+
+                    if (!_AddNewLDLApplication())
+                        throw new Exception("Failed to add new LDL application.");
+
+                    Mode = enMode.Update;
+                    return true;
 
                 case enMode.Update:
-                    if (Application.Save()) // Save Application (updated)
-                    {
-                        return _UpdateLDLApplication(); // Then update LDL row
-                    }
-                    return false;
+                    if (!Application.Save())
+                        throw new Exception("Failed to update Application.");
+
+                    if (!_UpdateLDLApplication())
+                        throw new Exception("Failed to update LDL application.");
+
+                    return true;
             }
 
             return false;
         }
+
+
+        //public bool Save()
+        //{
+        //    switch (Mode)
+        //    {
+        //        case enMode.AddNew:
+        //            if (Application.Save()) // Save Application first
+        //            {
+
+        //                if (_AddNewLDLApplication())
+        //                {
+        //                    Mode = enMode.Update;
+        //                    return true;
+        //                }
+        //            }
+        //            return false;
+
+        //        case enMode.Update:
+        //            if (Application.Save()) // Save Application (updated)
+        //            {
+        //                return _UpdateLDLApplication(); // Then update LDL row
+        //            }
+        //            return false;
+        //    }
+
+        //    return false;
+        //}
 
     }
 }

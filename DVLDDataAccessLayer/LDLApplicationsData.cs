@@ -168,9 +168,10 @@ GROUP BY
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string query = @"UPDATE LocalDrivingLicenseApplications
-                     SET ApplicationID = @ApplicationID,
-                         LicenseClassID = @LicenseClassID
-                     WHERE LDLApplicationID = @LDLApplicationID";
+                 SET ApplicationID = @ApplicationID,
+                     LicenseClassID = @LicenseClassID
+                 WHERE LocalDrivingLicenseApplicationID = @LDLApplicationID";
+
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@ApplicationID", ApplicationID);

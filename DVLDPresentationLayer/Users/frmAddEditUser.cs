@@ -52,6 +52,7 @@ namespace DVLDPresentationLayer
             if (_Mode == enMode.AddNew)
             {
                 tbLoginInfo.Enabled = false;
+                btSave.Enabled = false;
                 ctrlPersonCardWithFilter1.groupBox1.Enabled = true;
                 lbMode.Text = "Add New User";
                 _User = new clsUser();
@@ -127,6 +128,12 @@ namespace DVLDPresentationLayer
         {
             if (!ValidateChildren())
                 return;
+
+            //if (btNext.Enabled == false || _Mode == enMode.AddNew)
+            //{
+            //    MessageBox.Show("Please fill the required data first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
             _User.UserName = txtUserName.Text.Trim();
             _User.Password = txtPassword.Text.Trim();

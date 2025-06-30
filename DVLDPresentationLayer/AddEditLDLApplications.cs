@@ -80,6 +80,7 @@ namespace DVLDPresentationLayer
             if (_Mode == enMode.AddNew)
             {
                 tbApplicationInfo.Enabled = false;
+                btSave.Enabled = false;
                 personCardWithFilter1.groupBox1.Enabled = true;
                 lbMode.Text = "New Local Driving License Application";
                 _LDLApplication = new clsLDLApplication();
@@ -119,7 +120,7 @@ namespace DVLDPresentationLayer
 
             lbMode.Text = "Update Local Driving License Application";
 
-            lbLDLApplicationID.Text = _LDLApplication.ApplicationID.ToString();
+            lbLDLApplicationID.Text = _LDLApplication.LDLApplicationID.ToString();
             lbApplicationDate.Text = _LDLApplication.Application.ApplicationDate.ToShortDateString();
             cbLicenseClass.SelectedIndex = cbLicenseClass.FindString(_LDLApplication.LicenseClass.ClassName);
 
@@ -161,15 +162,50 @@ namespace DVLDPresentationLayer
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            int existingAppID = clsApplication.HasSameApplicationBefore(_PersonID, cbLicenseClass.SelectedIndex + 1);
-            if (existingAppID != -1) // i put the validation here
-            {
 
-                MessageBox.Show(@"Choose Another License Class, the selected Person Already have an active application for the 
-                     selected class with ID = " + existingAppID ,
-                    
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);// here i need to display the ApplicationID
+            int existingAppID = clsApplication.HasSameApplicationBefore(_PersonID, cbLicenseClass.SelectedIndex + 1);
+
+            if (_Mode == enMode.AddNew )
+            {
+                if (existingAppID != -1)
+                {
+
+                    MessageBox.Show(@"Choose Another License Class, the selected Person Already have an active application for the 
+                     selected class with ID = " + existingAppID,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
+            else if(_Mode == enMode.Update)
+            {
+                if (existingAppID != -1 && existingAppID != _LDLApplication.ApplicationID)
+                {
+
+                    MessageBox.Show(@"Choose Another License Class, the selected Person Already have an active application for the 
+                     selected class with ID = " + existingAppID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+
+            _LDLApplication.LicenseClass.LicenseClassID = cbLicenseClass.SelectedIndex + 1; 
+            _LDLApplication.Application.ApplicantPersonID = _PersonID;
+            _LDLApplication.Application.ApplicationDate = DateTime.Now;
+            _LDLApplication.Application.ApplicationTypeID = 1; // AddNewLDLApplication
+            _LDLApplication.Application.ApplicationStatus = 1;
+            _LDLApplication.Application.LastStatusDate = DateTime.Now;
+            _LDLApplication.Application.PaidFees = _ApplicationType.ApplicationTypeFees;
+            _LDLApplication.Application.CreatedByUserID = clsGlobalSettings.CurrentUser.UserID;
+
+
+            if (_LDLApplication.Save())
+                MessageBox.Show("Data Saved Successfully.");
+            else
+                MessageBox.Show("Error: Data Is not Saved Successfully.");
+
+            _Mode = enMode.Update;
+            lbMode.Text = "Update Local Driving License Application";
+            lbLDLApplicationID.Text = _LDLApplication.LDLApplicationID.ToString();
+
         }
     }
 }
