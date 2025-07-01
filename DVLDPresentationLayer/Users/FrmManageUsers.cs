@@ -111,6 +111,7 @@ namespace DVLDPresentationLayer
                 {
                     if (int.TryParse(textBox1.Text, out int id))
                         dv.RowFilter = $"[{SelectedColumn}] = {id}";
+
                     else
                         dv.RowFilter = "1 = 0"; // Invalid input, show no results
                 }

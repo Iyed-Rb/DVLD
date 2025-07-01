@@ -14,70 +14,70 @@ namespace DVLDDataAccessLayer
     public class clsApplicationsData
     {
 
-        public static DataTable GetAllApplications()
-        {
+        //public static DataTable GetAllApplications()
+        //{
 
-            DataTable dt = new DataTable();
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+        //    DataTable dt = new DataTable();
+        //    SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"SELECT L.LocalDrivingLicenseApplicationID as [L.D.LAppID], LC.ClassName as [Driving Class], 
-          P.NationalNo as [National No] ,
-          P.FirstName + ' ' + P.SecondName + ' ' + P.ThirdName + ' ' + P.LastName AS [Full Name],
-          A1.ApplicationDate as [Application Date],
+        //    string query = @"SELECT L.LocalDrivingLicenseApplicationID as LDLAppID, LC.ClassName as [Driving Class], 
+        //  P.NationalNo as [National No] ,
+        //  P.FirstName + ' ' + P.SecondName + ' ' + P.ThirdName + ' ' + P.LastName AS [Full Name],
+        //  A1.ApplicationDate as [Application Date],
      
-          ( SELECT COUNT(*) FROM TestAppointments T2
-            WHERE T2.LocalDrivingLicenseApplicationID = L.LocalDrivingLicenseApplicationID
-            AND T2.RetakeTestApplicationID IS NOT NULL
-          ) AS [Passed Tests],
-          CASE A1.ApplicationStatus
-            WHEN 1 THEN 'New'
-            WHEN 2 THEN 'Cancelled'
-            WHEN 3 THEN 'Completed'
-            ELSE 'Unknown'
-          END AS Status
+        //  ( SELECT COUNT(*) FROM TestAppointments T2
+        //    WHERE T2.LocalDrivingLicenseApplicationID = L.LocalDrivingLicenseApplicationID
+        //    AND T2.RetakeTestApplicationID IS NOT NULL
+        //  ) AS [Passed Tests],
+        //  CASE A1.ApplicationStatus
+        //    WHEN 1 THEN 'New'
+        //    WHEN 2 THEN 'Cancelled'
+        //    WHEN 3 THEN 'Completed'
+        //    ELSE 'Unknown'
+        //  END AS Status
 
-          FROM LocalDrivingLicenseApplications L
+        //  FROM LocalDrivingLicenseApplications L
 
-          INNER JOIN LicenseClasses LC 
-            ON L.LicenseClassID = LC.LicenseClassID
+        //  INNER JOIN LicenseClasses LC 
+        //    ON L.LicenseClassID = LC.LicenseClassID
 
-          INNER JOIN Applications A1 
-            ON L.ApplicationID = A1.ApplicationID
+        //  INNER JOIN Applications A1 
+        //    ON L.ApplicationID = A1.ApplicationID
 
-          INNER JOIN People P 
-            ON A1.ApplicantPersonID = P.PersonID;";
+        //  INNER JOIN People P 
+        //    ON A1.ApplicantPersonID = P.PersonID;";
 
-            SqlCommand command = new SqlCommand(query, connection);
+        //    SqlCommand command = new SqlCommand(query, connection);
 
-            try
-            {
-                connection.Open();
+        //    try
+        //    {
+        //        connection.Open();
 
-                SqlDataReader reader = command.ExecuteReader();
+        //        SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.HasRows)
+        //        if (reader.HasRows)
 
-                {
-                    dt.Load(reader);
-                }
+        //        {
+        //            dt.Load(reader);
+        //        }
 
-                reader.Close();
+        //        reader.Close();
 
 
-            }
+        //    }
 
-            catch (Exception ex)
-            {
-                // Console.WriteLine("Error: " + ex.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
+        //    catch (Exception ex)
+        //    {
+        //        // Console.WriteLine("Error: " + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
 
-            return dt;
+        //    return dt;
 
-        }
+        //}
 
 
         public static bool GetApplicationInfoByID(int ApplicationID, ref int ApplicantPersonID, ref DateTime ApplicationDate,ref int ApplicationTypeID,
@@ -175,7 +175,7 @@ namespace DVLDDataAccessLayer
             return ApplicationID;
         }
 
-        public static bool UpdateApplication(int ApplicationID, int ApplicantPersonID, DateTime ApplicationDate,
+        public static bool UpdateApplication(int ApplicationID, int ApplicantPersonID,
          int ApplicationTypeID, int ApplicationStatus, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserID)
         {
             int rowsAffected = 0;
@@ -184,7 +184,6 @@ namespace DVLDDataAccessLayer
 
             string query = @"UPDATE Applications  
                      SET ApplicantPersonID = @ApplicantPersonID,
-                         ApplicationDate = @ApplicationDate,
                          ApplicationTypeID = @ApplicationTypeID,
                          ApplicationStatus = @ApplicationStatus,
                          LastStatusDate = GETDATE(),
@@ -195,7 +194,6 @@ namespace DVLDDataAccessLayer
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@ApplicantPersonID", ApplicantPersonID);
-            command.Parameters.AddWithValue("@ApplicationDate", ApplicationDate);
             command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
             command.Parameters.AddWithValue("@ApplicationStatus", ApplicationStatus);
             command.Parameters.AddWithValue("@PaidFees", PaidFees);

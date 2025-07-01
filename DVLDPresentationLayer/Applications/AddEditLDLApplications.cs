@@ -88,7 +88,8 @@ namespace DVLDPresentationLayer
                 lbLDLApplicationID.Text = "[????] ";
                 lbApplicationDate.Text = lbApplicationDate.Text = DateTime.Now.ToShortDateString();
                 cbLicenseClass.SelectedIndex = 1;
-             
+                _LDLApplication.Application.ApplicationDate = DateTime.Now;
+
                 return;
             }
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -189,7 +190,7 @@ namespace DVLDPresentationLayer
 
             _LDLApplication.LicenseClass.LicenseClassID = cbLicenseClass.SelectedIndex + 1; 
             _LDLApplication.Application.ApplicantPersonID = _PersonID;
-            _LDLApplication.Application.ApplicationDate = DateTime.Now;
+         
             _LDLApplication.Application.ApplicationTypeID = 1; // AddNewLDLApplication
             _LDLApplication.Application.ApplicationStatus = 1;
             _LDLApplication.Application.LastStatusDate = DateTime.Now;

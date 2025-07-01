@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEditLDLApplications.cs">
+    <Compile Include="Applications\AddEditLDLApplications.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEditLDLApplications.Designer.cs">
+    <Compile Include="Applications\AddEditLDLApplications.Designer.cs">
       <DependentUpon>AddEditLDLApplications.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationsTypes\frmEditApplicationType.cs">
@@ -76,10 +76,10 @@
     <Compile Include="Controls\ctrlUserInfo.Designer.cs">
       <DependentUpon>ctrlUserInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmManageLDLApplications.cs">
+    <Compile Include="Applications\frmManageLDLApplications.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmManageLDLApplications.Designer.cs">
+    <Compile Include="Applications\frmManageLDLApplications.Designer.cs">
       <DependentUpon>frmManageLDLApplications.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PersonCardWithFilter.cs">
@@ -156,7 +156,7 @@
     <Compile Include="Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddEditLDLApplications.resx">
+    <EmbeddedResource Include="Applications\AddEditLDLApplications.resx">
       <DependentUpon>AddEditLDLApplications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ApplicationsTypes\frmEditApplicationType.resx">
@@ -171,7 +171,7 @@
     <EmbeddedResource Include="Controls\ctrlUserInfo.resx">
       <DependentUpon>ctrlUserInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmManageLDLApplications.resx">
+    <EmbeddedResource Include="Applications\frmManageLDLApplications.resx">
       <DependentUpon>frmManageLDLApplications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PersonCardWithFilter.resx">

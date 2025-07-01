@@ -112,12 +112,11 @@ namespace DVLDPresentationLayer
                 if (SelectedColumn == "L.D.LAppID")
                 {
                     if (int.TryParse(textBox1.Text, out int id))
-                        dv.RowFilter = $"[{SelectedColumn}] LIKE '%{id}%'";
-                    //dv.RowFilter = $"[{SelectedColumn}] = {id}";
+                        dv.RowFilter = $"[{SelectedColumn}] = {id}";
                     else
                         dv.RowFilter = "1 = 0"; // Invalid input, show no results
                 }
-                else if (SelectedColumn == "FullName" || SelectedColumn == "NationalNO" || SelectedColumn == "Status")
+                else if (SelectedColumn == "Full Name" || SelectedColumn == "NationalNO" || SelectedColumn == "Status")
                 {
                     dv.RowFilter = $"[{SelectedColumn}] LIKE '%{keyword}%'";
                     //dv.RowFilter = $"[{SelectedColumn}] = '{keyword}'";

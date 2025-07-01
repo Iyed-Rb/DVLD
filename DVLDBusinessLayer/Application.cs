@@ -53,10 +53,10 @@ namespace DVLDBusinessLayer
             Mode = enMode.Update;
         }
 
-        public static DataTable  GetAllApplicationsList()
-        {
-            return clsApplicationsData.GetAllApplications();
-        }
+        //public static DataTable  GetAllApplicationsList()
+        //{
+        //    return clsApplicationsData.GetAllApplications();
+        //}
 
         public static clsApplication FindApplicationByID(int ApplicationID)
         {
