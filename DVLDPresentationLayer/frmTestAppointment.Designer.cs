@@ -35,17 +35,17 @@
             this.dgvAllAppointments = new System.Windows.Forms.DataGridView();
             this.lbj = new System.Windows.Forms.Label();
             this.lbCountRow = new System.Windows.Forms.Label();
-            this.ctrlApplicationInfo1 = new DVLDPresentationLayer.Controls.ctrlApplicationInfo();
-            this.btCLose = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btAddAppointment = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TakeTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btAddAppointment = new System.Windows.Forms.Button();
+            this.btCLose = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ctrlApplicationInfo1 = new DVLDPresentationLayer.Controls.ctrlApplicationInfo();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllAppointments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbTest
@@ -71,7 +71,10 @@
             // 
             // dgvAllAppointments
             // 
+            this.dgvAllAppointments.AllowUserToAddRows = false;
+            this.dgvAllAppointments.AllowUserToDeleteRows = false;
             this.dgvAllAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAllAppointments.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvAllAppointments.Location = new System.Drawing.Point(12, 406);
             this.dgvAllAppointments.Name = "dgvAllAppointments";
             this.dgvAllAppointments.Size = new System.Drawing.Size(652, 150);
@@ -97,12 +100,49 @@
             this.lbCountRow.TabIndex = 78;
             this.lbCountRow.Text = "0";
             // 
-            // ctrlApplicationInfo1
+            // contextMenuStrip1
             // 
-            this.ctrlApplicationInfo1.Location = new System.Drawing.Point(12, 103);
-            this.ctrlApplicationInfo1.Name = "ctrlApplicationInfo1";
-            this.ctrlApplicationInfo1.Size = new System.Drawing.Size(674, 261);
-            this.ctrlApplicationInfo1.TabIndex = 75;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.editToolStripMenuItem,
+            this.TakeTestToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 86);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
+            this.editToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 38);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // TakeTestToolStripMenuItem
+            // 
+            this.TakeTestToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("TakeTestToolStripMenuItem.Image")));
+            this.TakeTestToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.TakeTestToolStripMenuItem.Name = "TakeTestToolStripMenuItem";
+            this.TakeTestToolStripMenuItem.Size = new System.Drawing.Size(136, 38);
+            this.TakeTestToolStripMenuItem.Text = "Take Test";
+            this.TakeTestToolStripMenuItem.Click += new System.EventHandler(this.TakeTestToolStripMenuItem_Click_1);
+            // 
+            // btAddAppointment
+            // 
+            this.btAddAppointment.BackColor = System.Drawing.Color.Transparent;
+            this.btAddAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAddAppointment.Image = ((System.Drawing.Image)(resources.GetObject("btAddAppointment.Image")));
+            this.btAddAppointment.Location = new System.Drawing.Point(627, 370);
+            this.btAddAppointment.Name = "btAddAppointment";
+            this.btAddAppointment.Size = new System.Drawing.Size(37, 30);
+            this.btAddAppointment.TabIndex = 80;
+            this.btAddAppointment.UseVisualStyleBackColor = false;
+            this.btAddAppointment.Click += new System.EventHandler(this.btAddAppointment_Click);
             // 
             // btCLose
             // 
@@ -128,47 +168,12 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // btAddAppointment
+            // ctrlApplicationInfo1
             // 
-            this.btAddAppointment.BackColor = System.Drawing.Color.Transparent;
-            this.btAddAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btAddAppointment.Image = ((System.Drawing.Image)(resources.GetObject("btAddAppointment.Image")));
-            this.btAddAppointment.Location = new System.Drawing.Point(627, 370);
-            this.btAddAppointment.Name = "btAddAppointment";
-            this.btAddAppointment.Size = new System.Drawing.Size(37, 30);
-            this.btAddAppointment.TabIndex = 80;
-            this.btAddAppointment.UseVisualStyleBackColor = false;
-            this.btAddAppointment.Click += new System.EventHandler(this.btAddAppointment_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 108);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
-            this.editToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
-            this.deleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
-            this.deleteToolStripMenuItem.Text = "Take Test";
+            this.ctrlApplicationInfo1.Location = new System.Drawing.Point(12, 103);
+            this.ctrlApplicationInfo1.Name = "ctrlApplicationInfo1";
+            this.ctrlApplicationInfo1.Size = new System.Drawing.Size(674, 261);
+            this.ctrlApplicationInfo1.TabIndex = 75;
             // 
             // frmTestAppointment
             // 
@@ -189,8 +194,8 @@
             this.Text = "frmTestAppointment";
             this.Load += new System.EventHandler(this.frmTestAppointment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllAppointments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,6 +214,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TakeTestToolStripMenuItem;
     }
 }

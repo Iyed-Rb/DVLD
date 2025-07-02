@@ -45,8 +45,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lbRetaleAppFees = new System.Windows.Forms.Label();
+            this.lbRetakeAppID = new System.Windows.Forms.Label();
+            this.lbRetakeAppFees = new System.Windows.Forms.Label();
             this.lbTotalFees = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -61,6 +61,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btCLose = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
+            this.TestfrmScheduleTest = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -232,25 +233,25 @@
             this.label10.TabIndex = 103;
             this.label10.Text = "Total Fees:";
             // 
-            // label11
+            // lbRetakeAppID
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(174, 426);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 18);
-            this.label11.TabIndex = 107;
-            this.label11.Text = "N/A";
+            this.lbRetakeAppID.AutoSize = true;
+            this.lbRetakeAppID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRetakeAppID.Location = new System.Drawing.Point(174, 426);
+            this.lbRetakeAppID.Name = "lbRetakeAppID";
+            this.lbRetakeAppID.Size = new System.Drawing.Size(35, 18);
+            this.lbRetakeAppID.TabIndex = 107;
+            this.lbRetakeAppID.Text = "N/A";
             // 
-            // lbRetaleAppFees
+            // lbRetakeAppFees
             // 
-            this.lbRetaleAppFees.AutoSize = true;
-            this.lbRetaleAppFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRetaleAppFees.Location = new System.Drawing.Point(179, 388);
-            this.lbRetaleAppFees.Name = "lbRetaleAppFees";
-            this.lbRetaleAppFees.Size = new System.Drawing.Size(17, 18);
-            this.lbRetaleAppFees.TabIndex = 108;
-            this.lbRetaleAppFees.Text = "0";
+            this.lbRetakeAppFees.AutoSize = true;
+            this.lbRetakeAppFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRetakeAppFees.Location = new System.Drawing.Point(179, 388);
+            this.lbRetakeAppFees.Name = "lbRetakeAppFees";
+            this.lbRetakeAppFees.Size = new System.Drawing.Size(17, 18);
+            this.lbRetakeAppFees.TabIndex = 108;
+            this.lbRetakeAppFees.Text = "0";
             // 
             // lbTotalFees
             // 
@@ -258,9 +259,9 @@
             this.lbTotalFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotalFees.Location = new System.Drawing.Point(412, 388);
             this.lbTotalFees.Name = "lbTotalFees";
-            this.lbTotalFees.Size = new System.Drawing.Size(17, 18);
+            this.lbTotalFees.Size = new System.Drawing.Size(26, 18);
             this.lbTotalFees.TabIndex = 109;
-            this.lbTotalFees.Text = "0";
+            this.lbTotalFees.Text = "10";
             // 
             // groupBox1
             // 
@@ -378,7 +379,7 @@
             this.btCLose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCLose.Image = ((System.Drawing.Image)(resources.GetObject("btCLose.Image")));
             this.btCLose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btCLose.Location = new System.Drawing.Point(273, 508);
+            this.btCLose.Location = new System.Drawing.Point(221, 523);
             this.btCLose.Name = "btCLose";
             this.btCLose.Size = new System.Drawing.Size(105, 32);
             this.btCLose.TabIndex = 124;
@@ -392,7 +393,7 @@
             this.btSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSave.Image = ((System.Drawing.Image)(resources.GetObject("btSave.Image")));
             this.btSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btSave.Location = new System.Drawing.Point(384, 508);
+            this.btSave.Location = new System.Drawing.Point(402, 474);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(105, 32);
             this.btSave.TabIndex = 125;
@@ -400,17 +401,27 @@
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
+            // TestfrmScheduleTest
+            // 
+            this.TestfrmScheduleTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TestfrmScheduleTest.Location = new System.Drawing.Point(12, 12);
+            this.TestfrmScheduleTest.Name = "TestfrmScheduleTest";
+            this.TestfrmScheduleTest.Size = new System.Drawing.Size(500, 505);
+            this.TestfrmScheduleTest.TabIndex = 126;
+            this.TestfrmScheduleTest.TabStop = false;
+            this.TestfrmScheduleTest.Text = "VisionTest";
+            // 
             // FrmScheduleTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(524, 542);
+            this.ClientSize = new System.Drawing.Size(524, 567);
             this.Controls.Add(this.btSave);
             this.Controls.Add(this.btCLose);
             this.Controls.Add(this.lbTotalFees);
-            this.Controls.Add(this.lbRetaleAppFees);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lbRetakeAppFees);
+            this.Controls.Add(this.lbRetakeAppID);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox6);
@@ -438,6 +449,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.TestfrmScheduleTest);
             this.Name = "FrmScheduleTest";
             this.Text = "FrmScheduleTest";
             this.Load += new System.EventHandler(this.FrmScheduleTest_Load);
@@ -484,11 +496,12 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lbRetaleAppFees;
+        private System.Windows.Forms.Label lbRetakeAppID;
+        private System.Windows.Forms.Label lbRetakeAppFees;
         private System.Windows.Forms.Label lbTotalFees;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btCLose;
         private System.Windows.Forms.Button btSave;
+        private System.Windows.Forms.GroupBox TestfrmScheduleTest;
     }
 }

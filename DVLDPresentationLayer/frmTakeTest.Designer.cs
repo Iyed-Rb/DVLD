@@ -50,8 +50,8 @@
             this.lbPersonFullName = new System.Windows.Forms.Label();
             this.lbCountTests = new System.Windows.Forms.Label();
             this.lbFees = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.TestID = new System.Windows.Forms.Label();
+            this.lbDate = new System.Windows.Forms.Label();
+            this.lbTestID = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
@@ -61,6 +61,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btCLose = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -284,26 +285,25 @@
             this.lbFees.TabIndex = 113;
             this.lbFees.Text = "10";
             // 
-            // label9
+            // lbDate
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(169, 272);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(99, 18);
-            this.label9.TabIndex = 114;
-            this.label9.Text = "10/Oct/2024";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+            this.lbDate.AutoSize = true;
+            this.lbDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDate.Location = new System.Drawing.Point(169, 272);
+            this.lbDate.Name = "lbDate";
+            this.lbDate.Size = new System.Drawing.Size(99, 18);
+            this.lbDate.TabIndex = 114;
+            this.lbDate.Text = "10/Oct/2024";
             // 
-            // TestID
+            // lbTestID
             // 
-            this.TestID.AutoSize = true;
-            this.TestID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TestID.Location = new System.Drawing.Point(169, 330);
-            this.TestID.Name = "TestID";
-            this.TestID.Size = new System.Drawing.Size(124, 18);
-            this.TestID.TabIndex = 115;
-            this.TestID.Text = "Not Taken Test";
+            this.lbTestID.AutoSize = true;
+            this.lbTestID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTestID.Location = new System.Drawing.Point(169, 330);
+            this.lbTestID.Name = "lbTestID";
+            this.lbTestID.Size = new System.Drawing.Size(124, 18);
+            this.lbTestID.TabIndex = 115;
+            this.lbTestID.Text = "Not Taken Test";
             // 
             // label10
             // 
@@ -389,6 +389,7 @@
             this.btCLose.TabIndex = 123;
             this.btCLose.Text = "        Close";
             this.btCLose.UseVisualStyleBackColor = true;
+            this.btCLose.Click += new System.EventHandler(this.btCLose_Click);
             // 
             // btSave
             // 
@@ -403,6 +404,16 @@
             this.btSave.Text = "        Save";
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(483, 358);
+            this.groupBox1.TabIndex = 125;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "VisionTest";
             // 
             // frmTakeTest
             // 
@@ -419,8 +430,8 @@
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.TestID);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lbTestID);
+            this.Controls.Add(this.lbDate);
             this.Controls.Add(this.lbFees);
             this.Controls.Add(this.lbCountTests);
             this.Controls.Add(this.lbPersonFullName);
@@ -442,8 +453,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.groupBox1);
             this.Name = "frmTakeTest";
             this.Text = "frmTakeTest";
+            this.Load += new System.EventHandler(this.frmTakeTest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -482,8 +495,8 @@
         private System.Windows.Forms.Label lbPersonFullName;
         private System.Windows.Forms.Label lbCountTests;
         private System.Windows.Forms.Label lbFees;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label TestID;
+        private System.Windows.Forms.Label lbDate;
+        private System.Windows.Forms.Label lbTestID;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox9;
@@ -493,5 +506,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btCLose;
         private System.Windows.Forms.Button btSave;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

@@ -20,7 +20,7 @@ namespace DVLDBusinessLayer
         public string Notes { get; set; } 
         public int CreatedByUserID { get; set; }
 
-        clsTest()
+        public clsTest()
         {
             this.TestID = -1;
             this.TestAppointment = new clsTestAppointment();

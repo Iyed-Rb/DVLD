@@ -54,21 +54,21 @@ namespace DVLDDataAccessLayer
         }
 
 
-        public static int AddNewTest(int TestAppointmentID, bool TotalResult, string Notes, int CreatedByUserID)
+        public static int AddNewTest(int TestAppointmentID, bool TestResult, string Notes, int CreatedByUserID)
         {
             int TestID = -1;
 
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 string query = @"
-        INSERT INTO Tests (TestAppointmentID, TotalResult, Notes, CreatedByUserID)
-        VALUES (@TestAppointmentID, @TotalResult, @Notes, @CreatedByUserID);
+        INSERT INTO Tests (TestAppointmentID, TestResult, Notes, CreatedByUserID)
+        VALUES (@TestAppointmentID, @TestResult, @Notes, @CreatedByUserID);
 
         SELECT SCOPE_IDENTITY();";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
-                command.Parameters.AddWithValue("@TotalResult", TotalResult);
+                command.Parameters.AddWithValue("@TestResult", TestResult);
                 command.Parameters.AddWithValue("@Notes", Notes ?? string.Empty);
                 command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
 

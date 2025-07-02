@@ -74,6 +74,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1027, 72);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.MenuActivate += new System.EventHandler(this.menuStrip1_MenuActivate);
             // 
             // applicationsToolStripMenuItem
             // 

@@ -35,6 +35,8 @@ namespace DVLDPresentationLayer
         private void frmTestAppointment_Load(object sender, EventArgs e)
         {
             _RefreshAppointmentList();
+            dgvAllAppointments.AllowUserToAddRows = false;
+            dgvAllAppointments.ReadOnly = true;
             ctrlApplicationInfo1.FillCtrlInformation(_LDLApplicationID);
             if (Test == enTest.Vision)
             {
@@ -76,25 +78,104 @@ namespace DVLDPresentationLayer
 
         private void btAddAppointment_Click(object sender, EventArgs e)
         {
-    
-                // Check if there's any unlocked appointment
-                bool hasUnlockedAppointment = _dtAppointments.AsEnumerable().Any(row =>
-                    row.Field<bool>("IsLocked") == false
-                );
+            // Step 1: Check if there's any unlocked appointment
+            bool hasUnlockedAppointment = _dtAppointments.AsEnumerable().Any(row =>
+                row.Field<bool>("IsLocked") == false
+            );
 
-                if (hasUnlockedAppointment)
-                {
-                    MessageBox.Show("Person already has an active appointment for this test.\nYou cannot add a new appointment.",
-                                    "Not Allowed",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
-                    return;
-                }
+            if (hasUnlockedAppointment)
+            {
+                MessageBox.Show("Person already has an active appointment for this test.\nYou cannot add a new appointment.",
+                                "Not Allowed",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
+            }
 
-                // No active appointment found → allow scheduling
-                FrmScheduleTest frmScheduleTest = new FrmScheduleTest(_LDLApplicationID, Test);
-                frmScheduleTest.ShowDialog();
+            // Step 2: Check if this test has already been passed
+            int passedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
+
+            // We assume GetPassedTestsCount returns:
+            // 1 → Vision passed
+            // 2 → Vision + Written passed
+            // 3 → All tests passed
+
+            bool alreadyPassed = false;
+
+            switch (Test)
+            {
+                case enTest.Vision:
+                    alreadyPassed = passedTests >= 1;
+                    break;
+                case enTest.Written:
+                    alreadyPassed = passedTests >= 2;
+                    break;
+                case enTest.Street:
+                    alreadyPassed = passedTests == 3;
+                    break;
+            }
+
+            if (alreadyPassed)
+            {
+                MessageBox.Show("This person already passed this test before. You can only retake failed tests.",
+                                "Not Allowed",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
+            }
+
             
+            int testAttemptsCount = _dtAppointments.Rows.Count; // all appointments already filtered by this test
+            bool isFirstTime = (testAttemptsCount == 0);
+            // Step 3: All checks passed → allow scheduling
+            FrmScheduleTest frmScheduleTest = new FrmScheduleTest(_LDLApplicationID, Test, isFirstTime);
+            frmScheduleTest.ShowDialog();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsTestAppointment testAppointment = clsTestAppointment.FindTestAppointmentByID( (int)dgvAllAppointments.CurrentRow.Cells[0].Value);
+            if (testAppointment.IsLocked == true)
+            {
+                MessageBox.Show("Cannot Edit Appointment, Test Already Taken", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int testAttemptsCount = _dtAppointments.Rows.Count; // all appointments already filtered by this test
+            bool isFirstTime = (testAttemptsCount == 0);
+            FrmScheduleTest frm = new FrmScheduleTest(_LDLApplicationID, Test, (int)dgvAllAppointments.CurrentRow.Cells[0].Value, isFirstTime);
+            frm.ShowDialog();
+            _RefreshAppointmentList();
+        }
+
+ 
+
+        private void TakeTestToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+
+            clsTestAppointment testAppointment = clsTestAppointment.FindTestAppointmentByID((int)dgvAllAppointments.CurrentRow.Cells[0].Value);
+            if (testAppointment.IsLocked == true)
+            {
+                MessageBox.Show("Test Already Taken", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int passedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
+            if (passedTests == 0)
+            {
+                Test = enTest.Vision;
+            }
+            else if (passedTests == 1)
+            {
+                Test = enTest.Written;
+            }
+            else if ( passedTests == 2)
+            {
+                Test = enTest.Street;
+            }
+            frmTakeTest frmTakeTest = new frmTakeTest(_LDLApplicationID, (int)dgvAllAppointments.CurrentRow.Cells[0].Value, Test);
+            frmTakeTest.ShowDialog();
+            _RefreshAppointmentList();
 
         }
     }

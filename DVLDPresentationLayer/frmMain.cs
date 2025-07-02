@@ -73,5 +73,10 @@ namespace DVLDPresentationLayer
             frmManageLDLApplications frm = new frmManageLDLApplications();
             frm.ShowDialog();
         }
+
+        private void menuStrip1_MenuActivate(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

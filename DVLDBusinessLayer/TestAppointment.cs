@@ -26,6 +26,17 @@ namespace DVLDBusinessLayer
         public bool IsLocked { get; set; }
         public int RetakeTestApplicationID { get; set; }
 
+        //public int LDLApplicationID
+        //{
+        //    get { return LDLApplication.LDLApplicationID; }
+        //    set
+        //    {
+        //        LDLApplication = clsLDLApplication.FindLDLApplicationByID(value);
+        //        if (LDLApplication == null)
+        //            throw new Exception($"LDLApplication with ID {value} not found.");
+        //    }
+        //}
+
         public clsTestAppointment()
         {
             TestAppointmentID = -1;
@@ -85,7 +96,7 @@ namespace DVLDBusinessLayer
         public  bool _AddNewTestAppointment()
         {
             this.TestAppointmentID = clsTestAppointmentData.AddNewTestAppointment(this.TestTypeID, this.LDLApplication.LDLApplicationID,
-            this.AppointmentDate, this.PaidFees, this.CreatedByUserID, this.IsLocked);
+            this.AppointmentDate, this.PaidFees, this.CreatedByUserID, this.IsLocked, this.RetakeTestApplicationID);
 
             return (this.TestAppointmentID != -1);
 

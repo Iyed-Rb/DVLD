@@ -18,7 +18,7 @@ namespace DVLDDataAccessLayer
 
             string query = @"select T.TestAppointmentID,T.AppointmentDate,T.PaidFees, T.IsLocked, T.TestTypeID from TestAppointments T
 	Inner Join LocalDrivingLicenseApplications L On T.LocalDrivingLicenseApplicationID = L.LocalDrivingLicenseApplicationID
-	Inner Join Applications A On A.ApplicationID = L.LocalDrivingLicenseApplicationID 
+	Inner Join Applications A On A.ApplicationID = L.ApplicationID
 	Inner Join People P On P.PersonID = A.ApplicantPersonID
 	where T.TestTypeID = @TestTypeID and PersonID = @PersonID";
 
@@ -113,21 +113,21 @@ namespace DVLDDataAccessLayer
 
 
         public static int AddNewTestAppointment(int TestTypeID, int LDLApplicationID,
-      DateTime AppointmentDate, decimal PaidFees, int CreatedByUserID, bool IsLocked)
+        DateTime AppointmentDate, decimal PaidFees, int CreatedByUserID, bool IsLocked, int RetakeTestApplicationID)
         {
             int AppointmentID = -1;
 
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 string query = @"
-        INSERT INTO TestAppointments 
-        (TestTypeID, LicenseClassID, LocalDrivingLicenseApplicationID, AppointmentDate, 
-         PaidFees, CreatedByUserID, IsLocked, RetakeTestApplicationID)
-        VALUES 
-        (@TestTypeID, @LicenseClassID, @LDLApplicationID, @AppointmentDate, 
-         @PaidFees, @CreatedByUserID, @IsLocked, NULL);
+            INSERT INTO TestAppointments 
+            (TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, 
+             PaidFees, CreatedByUserID, IsLocked, RetakeTestApplicationID)
+            VALUES 
+            (@TestTypeID, @LDLApplicationID, @AppointmentDate, 
+             @PaidFees, @CreatedByUserID, @IsLocked, @RetakeTestApplicationID);
 
-        SELECT SCOPE_IDENTITY();";
+            SELECT SCOPE_IDENTITY();";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
@@ -137,16 +137,17 @@ namespace DVLDDataAccessLayer
                 command.Parameters.AddWithValue("@PaidFees", PaidFees);
                 command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
                 command.Parameters.AddWithValue("@IsLocked", IsLocked);
+                if (RetakeTestApplicationID == -1)
+                    command.Parameters.AddWithValue("@RetakeTestApplicationID", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
 
                 try
                 {
                     connection.Open();
                     object result = command.ExecuteScalar();
-
                     if (result != null && int.TryParse(result.ToString(), out int insertedID))
-                    {
                         AppointmentID = insertedID;
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -158,32 +159,36 @@ namespace DVLDDataAccessLayer
         }
 
 
+
         public static bool UpdateTestAppointment(int TestAppointmentID, int TestTypeID, int LDLApplicationID,
-            DateTime AppointmentDate, decimal PaidFees, int CreatedByUserID, bool IsLocked, int RetakeTestApplicationID)
+    DateTime AppointmentDate, decimal PaidFees, int CreatedByUserID, bool IsLocked, int RetakeTestApplicationID)
         {
             int rowsAffected = 0;
 
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 string query = @"UPDATE TestAppointments
-                  SET TestTypeID = @TestTypeID,
-                      LicenseClassID = @LicenseClassID,
-                      LocalDrivingLicenseApplicationID = @LDLApplicationID,
-                      AppointmentDate = @AppointmentDate,
-                      PaidFees = @PaidFees,
-                      CreatedByUserID = @CreatedByUserID,
-                      IsLocked = @IsLocked,
-                      RetakeTestApplicationID = @RetakeTestApplicationID
-                  WHERE TestAppointmentID = @TestAppointmentID";
+          SET TestTypeID = @TestTypeID,
+              LocalDrivingLicenseApplicationID = @LDLApplicationID,
+              AppointmentDate = @AppointmentDate,
+              PaidFees = @PaidFees,
+              CreatedByUserID = @CreatedByUserID,
+              IsLocked = @IsLocked,
+              RetakeTestApplicationID = @RetakeTestApplicationID
+          WHERE TestAppointmentID = @TestAppointmentID";
 
                 SqlCommand command = new SqlCommand(query, connection);
+
                 command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
                 command.Parameters.AddWithValue("@LDLApplicationID", LDLApplicationID);
                 command.Parameters.AddWithValue("@AppointmentDate", AppointmentDate);
                 command.Parameters.AddWithValue("@PaidFees", PaidFees);
                 command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
                 command.Parameters.AddWithValue("@IsLocked", IsLocked);
-                command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID == -1 ? (object)DBNull.Value : RetakeTestApplicationID);
+                if (RetakeTestApplicationID == -1)
+                    command.Parameters.AddWithValue("@RetakeTestApplicationID", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
                 command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
 
                 try
@@ -199,6 +204,7 @@ namespace DVLDDataAccessLayer
 
             return rowsAffected > 0;
         }
+
 
         public static bool DeleteTestAppointment(int TestAppointmentID)
         {
