@@ -69,5 +69,10 @@ namespace DVLDPresentationLayer
         {
 
         }
+
+        private void ctrlPersonInformation1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLDPresentationLayer.frmTestAppointment;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DVLDPresentationLayer
@@ -24,6 +25,7 @@ namespace DVLDPresentationLayer
         {
             _dtLDLApplications = clsLDLApplication.GetAllLDLApplications();
             dgvAllLDLApplications.DataSource = _dtLDLApplications;
+
             int rowCount = dgvAllLDLApplications.Rows.Count;
             lbCountRow.Text = rowCount.ToString();
 
@@ -47,6 +49,32 @@ namespace DVLDPresentationLayer
 
             dgvAllLDLApplications.AllowUserToAddRows = false;
             dgvAllLDLApplications.ReadOnly = true;
+
+            int PassedTest = clsLDLApplication.GetPassedTestsCount((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
+            if (PassedTest == 0)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = true;
+                scheduleWrittenTestToolStripMenuItem.Enabled = false;
+                scheduleStreetTestToolStripMenuItem.Enabled = false;
+            }
+            else if (PassedTest == 1)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = false;
+                scheduleWrittenTestToolStripMenuItem.Enabled = true;
+                scheduleStreetTestToolStripMenuItem.Enabled = false;
+            }
+            else if (PassedTest == 2)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = false;
+                scheduleWrittenTestToolStripMenuItem.Enabled = false;
+                scheduleStreetTestToolStripMenuItem.Enabled = true;
+            }
+            else if (PassedTest == 3)
+            {
+                scheduleVisionTestToolStripMenuItem.Enabled = false;
+                scheduleWrittenTestToolStripMenuItem.Enabled = false;
+                scheduleStreetTestToolStripMenuItem.Enabled = false;
+            }
 
         }
 
@@ -205,5 +233,31 @@ namespace DVLDPresentationLayer
             }
         }
 
+        private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells["Passed Tests"].Value;
+            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+
+            frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Vision);
+            frmTestAppointment.ShowDialog();
+        }
+
+        private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells["Passed Tests"].Value;
+            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+
+            frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Written);
+            frmTestAppointment.ShowDialog();
+        }
+
+        private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells["Passed Tests"].Value;
+            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+
+            frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Street);
+            frmTestAppointment.ShowDialog();
+        }
     }
 }

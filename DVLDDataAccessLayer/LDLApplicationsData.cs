@@ -12,6 +12,32 @@ namespace DVLDDataAccessLayer
     public class clsLDLApplicationData
     {
 
+
+        public static int GetPassedTestsCount(int LDLApplicationID)
+        {
+            int count = 0;
+            using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string query = @"
+            SELECT COUNT(DISTINCT TestAppointments.TestAppointmentID)
+            FROM TestAppointments 
+            INNER JOIN Tests ON TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+            WHERE TestAppointments.LocalDrivingLicenseApplicationID = @LDLApplicationID
+              AND Tests.TestResult = 1";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@LDLApplicationID", LDLApplicationID);
+
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                if (result != null && int.TryParse(result.ToString(), out int res))
+                    count = res;
+            }
+            return count;
+        }
+
+
+
         public static DataTable GetAllLDLApplications()
         {
 

@@ -111,7 +111,7 @@ namespace DVLDBusinessLayer
 
         private bool _UpdateApplication()
         {
-            return clsApplicationsData.UpdateApplication(this.ApplicationID, this.ApplicantPersonID, this.ApplicationDate,
+            return clsApplicationsData.UpdateApplication(this.ApplicationID, this.ApplicantPersonID,
                 this.ApplicationTypeID, this.ApplicationStatus, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
         }
 

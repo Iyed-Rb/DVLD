@@ -40,6 +40,11 @@ namespace DVLDBusinessLayer
         }
 
 
+        public static int GetPassedTestsCount(int ldlApplicationID)
+        {
+            return clsLDLApplicationData.GetPassedTestsCount(ldlApplicationID);
+        }
+     
         public static DataTable GetAllLDLApplications()
         {
             return clsLDLApplicationData.GetAllLDLApplications();
@@ -99,60 +104,60 @@ namespace DVLDBusinessLayer
             return clsLDLApplicationData.HasSameLDLApplication(NationalNo,LicenseClassID);
         }
 
-        public bool Save()
-        {
-            switch (Mode)
-            {
-                case enMode.AddNew:
-                    if (!Application.Save())
-                        throw new Exception("Failed to save Application.");
-
-                    if (!_AddNewLDLApplication())
-                        throw new Exception("Failed to add new LDL application.");
-
-                    Mode = enMode.Update;
-                    return true;
-
-                case enMode.Update:
-                    if (!Application.Save())
-                        throw new Exception("Failed to update Application.");
-
-                    if (!_UpdateLDLApplication())
-                        throw new Exception("Failed to update LDL application.");
-
-                    return true;
-            }
-
-            return false;
-        }
-
-
         //public bool Save()
         //{
         //    switch (Mode)
         //    {
         //        case enMode.AddNew:
-        //            if (Application.Save()) // Save Application first
-        //            {
+        //            if (!Application.Save())
+        //                throw new Exception("Failed to save Application.");
 
-        //                if (_AddNewLDLApplication())
-        //                {
-        //                    Mode = enMode.Update;
-        //                    return true;
-        //                }
-        //            }
-        //            return false;
+        //            if (!_AddNewLDLApplication())
+        //                throw new Exception("Failed to add new LDL application.");
+
+        //            Mode = enMode.Update;
+        //            return true;
 
         //        case enMode.Update:
-        //            if (Application.Save()) // Save Application (updated)
-        //            {
-        //                return _UpdateLDLApplication(); // Then update LDL row
-        //            }
-        //            return false;
+        //            if (!Application.Save())
+        //                throw new Exception("Failed to update Application.");
+
+        //            if (!_UpdateLDLApplication())
+        //                throw new Exception("Failed to update LDL application.");
+
+        //            return true;
         //    }
 
         //    return false;
         //}
+
+
+        public bool Save()
+        {
+            switch (Mode)
+            {
+                case enMode.AddNew:
+                    if (Application.Save()) // Save Application first
+                    {
+
+                        if (_AddNewLDLApplication())
+                        {
+                            Mode = enMode.Update;
+                            return true;
+                        }
+                    }
+                    return false;
+
+                case enMode.Update:
+                    if (Application.Save()) // Save Application (updated)
+                    {
+                        return _UpdateLDLApplication(); // Then update LDL row
+                    }
+                    return false;
+            }
+
+            return false;
+        }
 
     }
 }
