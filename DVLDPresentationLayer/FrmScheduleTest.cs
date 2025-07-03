@@ -7,6 +7,7 @@ using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace DVLDPresentationLayer
         clsTestAppointment _TestAppointment;
 
         private bool _IsFirstTime;
+      
 
         clsApplication _Application;
 
@@ -32,41 +34,133 @@ namespace DVLDPresentationLayer
         public enum enMode { AddNew = 0, Update = 1 };
         private enMode _Mode;
 
-
+        int _CountRow;
         public enTest _Test;
 
-        public FrmScheduleTest(int ApplicationID, enTest test, bool isFirstTime)
+        bool _IsLocked;
+        public FrmScheduleTest(int LDLApplicationID, enTest test, bool isFirstTime, int CountRow)
         {
             InitializeComponent();
             _Mode = enMode.AddNew;
-            _LDLApplicationID = ApplicationID;
+            _LDLApplicationID = LDLApplicationID;
             _Test = test;
             _IsFirstTime = isFirstTime;
-            _Mode = enMode.AddNew;
+            _CountRow = CountRow;   
+   
         }
-        public FrmScheduleTest(int ApplicationID, enTest test, int AppointmentID, bool isFirstTime)
+        public FrmScheduleTest(int ApplicationID, enTest test, int AppointmentID, bool isFirstTime, bool IsLocked)
         {
             InitializeComponent();
-            _Mode = enMode.AddNew;
+           
             _LDLApplicationID = ApplicationID;
             _Test = test;
             _TestAppointmentID = AppointmentID;
             _IsFirstTime = isFirstTime;
             _Mode = enMode.Update;
+            _IsLocked = IsLocked;
 
+        }
+
+        private DateTime GetLastAppointmentDate()
+        {
+            DataTable _dtAppointments = clsTestAppointment.GetAllAppointmentsByTestTypeID((int)_Test,
+                _LDLApplication.Application.ApplicantPersonID, _LDLApplication.LicenseClassID);
+            if (_dtAppointments.Rows.Count == 0)
+                return DateTime.Today;
+
+            DateTime latestDate = DateTime.MinValue;
+
+            foreach (DataRow row in _dtAppointments.Rows)
+            {
+                DateTime currentDate = Convert.ToDateTime(row["Appointment Date"]);
+                if (currentDate > latestDate)
+                    latestDate = currentDate;
+            }
+
+            return latestDate;
+        }
+
+        private DateTime GetLastLockedAppointmentDateExcludingCurrent()
+        {
+            DataTable _dtAppointments = clsTestAppointment.GetAllAppointmentsByTestTypeID(
+                (int)_Test,
+                _LDLApplication.Application.ApplicantPersonID,
+                _LDLApplication.LicenseClassID);
+
+            if (_dtAppointments.Rows.Count == 0)
+                return DateTime.Today.AddDays(-1);
+
+            DateTime latestDate = DateTime.MinValue;
+
+            foreach (DataRow row in _dtAppointments.Rows)
+            {
+                bool isLocked = Convert.ToBoolean(row["Is Locked"]);
+                int appointmentID = Convert.ToInt32(row["Appointment ID"]);
+
+                if (!isLocked || appointmentID == _TestAppointmentID)
+                    continue;
+
+                DateTime currentDate = Convert.ToDateTime(row["Appointment Date"]);
+                if (currentDate > latestDate)
+                    latestDate = currentDate;
+            }
+
+            return latestDate;
+        }
+
+
+        private void enableGroupBoxControls(int Number)
+        {
+            if (Number == 0 )
+            {
+                groupBox1.Enabled = false;
+                label8.Enabled = false;
+                pictureBox7.Enabled = false;
+                lbRetakeAppFees.Enabled = false;
+                label10.Enabled = false;
+                pictureBox9.Enabled = false;
+                pictureBox10.Enabled = false;
+                label9.Enabled = false;
+                lbTotalFees.Enabled=false;
+                lbRetakeAppID.Enabled = false;
+            }
+            else if (Number == 1 )
+            {
+                groupBox1.Enabled = true;
+                label8.Enabled = true;
+                pictureBox7.Enabled = true;
+                lbRetakeAppFees.Enabled = true;
+                label10.Enabled = true;
+                pictureBox9.Enabled = true;
+                pictureBox10.Enabled = true;
+                label9.Enabled = true;
+                lbTotalFees.Enabled = true;
+                lbRetakeAppID.Enabled = true;
+            }
         }
 
         private void _LoadData()
         {
+            if (_IsLocked)
+            {
 
-            //dateTimePicker1.MinDate = DateTime.Today;
-            //dateTimePicker1.Value = DateTime.Today;
+                dateTimePicker1.Enabled = false;
+                label11.Visible = true;
+                btSave.Enabled = false;
+                return;
+            }
+            dateTimePicker1.Enabled = true;
+            label11.Visible = false;
+            btSave.Enabled = true;
+
+            
             _LDLApplication = clsLDLApplication.FindLDLApplicationByID(_LDLApplicationID);
 
             if (_LDLApplication == null)
             {
                 MessageBox.Show("LDL Application not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
+                return;
             }
 
             lbDLAppID.Text = _LDLApplication.LDLApplicationID.ToString();
@@ -75,12 +169,12 @@ namespace DVLDPresentationLayer
             _Person = clsPerson.FindPersonByID(_LDLApplication.Application.ApplicantPersonID);
             lbPersonFullName.Text = _Person.FirstName + " " + _Person.SecondName + " " + _Person.ThirdName + " " + _Person.LastName;
 
-            int PassedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
-            lbCountTests.Text = PassedTests.ToString();
+            //int PassedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
+            lbTrial.Text = _CountRow.ToString();
 
             clsTestTypes clsTestTypes = clsTestTypes.FindTestTypeByID((int)_Test);
             lbFees.Text = clsTestTypes.TestTypeFees.ToString();
-            MessageBox.Show("lbFees.Text = " + lbFees.Text);
+            
 
 
             clsApplicationTypes ApplicationType = clsApplicationTypes.FindApplicationTypeByID(7);
@@ -92,14 +186,23 @@ namespace DVLDPresentationLayer
 
                 if (_IsFirstTime)
                 {
-                    groupBox1.Enabled = false;
+                    dateTimePicker1.MinDate = DateTime.Today;
+                    dateTimePicker1.Value = DateTime.Today;
+                    enableGroupBoxControls(0);
+                    lbRetakeAppID.Text = "N/A";
                 }
                 else
                 {
-                    groupBox1.Enabled = true;
+                    DateTime lastDate = GetLastAppointmentDate();
+                    dateTimePicker1.MinDate = lastDate.AddDays(1);
+                    dateTimePicker1.Value = dateTimePicker1.MinDate;
+
+                    enableGroupBoxControls(1);
+
 
                     lbRetakeAppFees.Text = ApplicationType.ApplicationTypeFees.ToString();
-                    MessageBox.Show("lbRetakeAppFees.Text = " + lbRetakeAppFees.Text);
+                    lbRetakeAppID.Text = "N/A";
+
                     _Application = new clsApplication();
                     _Application.ApplicationDate = DateTime.Now;
                     decimal fees = Convert.ToDecimal(lbFees.Text);
@@ -115,16 +218,23 @@ namespace DVLDPresentationLayer
 
             _TestAppointment = clsTestAppointment.FindTestAppointmentByID(_TestAppointmentID);
             dateTimePicker1.Value = _TestAppointment.AppointmentDate;
+            DateTime lastLockedDate = GetLastLockedAppointmentDateExcludingCurrent();
+            dateTimePicker1.MinDate = lastLockedDate.AddDays(1);
             if (_IsFirstTime)
             {
-                groupBox1.Enabled = false;
+                dateTimePicker1.MinDate = DateTime.Today;
+                enableGroupBoxControls(0);
+                lbRetakeAppID.Text = "N/A";
             }
             else
             {
-                groupBox1.Enabled = true;
+                //DateTime lastDate = GetLastAppointmentDate();
+                //dateTimePicker1.MinDate = lastDate;
+                enableGroupBoxControls(1);
                 lbRetakeAppFees.Text = ApplicationType.ApplicationTypeFees.ToString();
-                MessageBox.Show("lbRetakeAppFees.Text = " + lbRetakeAppFees.Text);
+     
                 _Application = clsApplication.FindApplicationByID(_TestAppointment.RetakeTestApplicationID);
+                lbRetakeAppID.Text = _Application.ApplicationID.ToString();
 
                 decimal fees = Convert.ToDecimal(lbFees.Text);
                 decimal retakeFees = Convert.ToDecimal(lbRetakeAppFees.Text);
@@ -137,7 +247,6 @@ namespace DVLDPresentationLayer
         private void FrmScheduleTest_Load(object sender, EventArgs e)
         {
            _LoadData();
-
 
         }
 

@@ -25,9 +25,15 @@ namespace DVLDPresentationLayer.Applications
             int rowCount = dgvAllApplicationsTypes.Rows.Count;
             lbCountRow.Text = rowCount.ToString();
 
-            dgvAllApplicationsTypes.Columns["ApplicationTypeID"].Width = 85;
-            dgvAllApplicationsTypes.Columns["ApplicationTypeTitle"].Width = 220;
-            dgvAllApplicationsTypes.Columns["ApplicationFees"].Width = 100;
+            if (dgvAllApplicationsTypes.Columns.Contains("ApplicationTypeID"))
+                dgvAllApplicationsTypes.Columns["ApplicationTypeID"].Width = 85;
+
+            if (dgvAllApplicationsTypes.Columns.Contains("ApplicationTypeTitle"))
+                dgvAllApplicationsTypes.Columns["ApplicationTypeTitle"].Width = 220;
+
+            if (dgvAllApplicationsTypes.Columns.Contains("ApplicationFees"))
+                dgvAllApplicationsTypes.Columns["ApplicationFees"].Width = 100;
+
 
         }
         private void FrmManageApplicationsTypes_Load(object sender, EventArgs e)

@@ -23,6 +23,7 @@ namespace DVLDPresentationLayer
         public enTest Test;
 
         DataTable _dtAppointments;
+        int _CountRow;
         public frmTestAppointment(int LDLApplicationID, int PassedTests, enTest test)
         {
             InitializeComponent();
@@ -42,18 +43,21 @@ namespace DVLDPresentationLayer
             {
                 pictureBox1.Image = Properties.Resources.Vision_512;
                 lbTest.Text = "Vision Test Appointments";
+                this.Text = "Vision Test Appointments";
             }
             else if (Test == enTest.Written)
             {
                 pictureBox1.Image = Properties.Resources.Written_Test_512;
                 lbTest.Text = "Written Test Appointments";
+                this.Text = "Written Test Appointments";
             }
             else if (Test == enTest.Street)
             {
                 pictureBox1.Image = Properties.Resources.driving_test_512;
                 lbTest.Text = "Street Test Appointments";
+                this.Text = "Street Test Appointments";
             }
-            
+         
         }
 
         private void _RefreshAppointmentList()
@@ -65,10 +69,32 @@ namespace DVLDPresentationLayer
                 return;
             }
             int PersonID = _LDLApplication.Application.ApplicantPersonID;
-            _dtAppointments = clsTestAppointment.GetAllAppointmentsByTestTypeID((int)enTest.Vision, PersonID);
+            _dtAppointments = clsTestAppointment.GetAllAppointmentsByTestTypeID((int)Test, PersonID, _LDLApplication.LicenseClassID);
+
+           
             dgvAllAppointments.DataSource = _dtAppointments;
-            int rowCount = dgvAllAppointments.Rows.Count;
-            lbCountRow.Text = rowCount.ToString();
+            if (dgvAllAppointments.Columns.Contains("Appointment Date"))
+            {
+                dgvAllAppointments.Columns["Appointment Date"].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm tt";
+            }
+            _CountRow = dgvAllAppointments.Rows.Count;
+            lbCountRow.Text = _CountRow.ToString();
+            ctrlApplicationInfo1.FillCtrlInformation(_LDLApplicationID);
+
+            if (dgvAllAppointments.Columns.Contains("Appointment ID"))
+                dgvAllAppointments.Columns["Appointment ID"].Width = 130;
+
+            if (dgvAllAppointments.Columns.Contains("Appointment Date"))
+            {
+                dgvAllAppointments.Columns["Appointment Date"].DefaultCellStyle.Format = "dd/MM/yyyy hh:mm tt";
+                dgvAllAppointments.Columns["Appointment Date"].Width = 130;
+            }
+
+            if (dgvAllAppointments.Columns.Contains("Paid Fees"))
+                dgvAllAppointments.Columns["Paid Fees"].Width = 110;
+
+            if (dgvAllAppointments.Columns.Contains("Is Locked"))
+                dgvAllAppointments.Columns["Is Locked"].Width = 80;
         }
 
         private void btCLose_Click(object sender, EventArgs e)
@@ -80,7 +106,7 @@ namespace DVLDPresentationLayer
         {
             // Step 1: Check if there's any unlocked appointment
             bool hasUnlockedAppointment = _dtAppointments.AsEnumerable().Any(row =>
-                row.Field<bool>("IsLocked") == false
+                row.Field<bool>("Is Locked") == false
             );
 
             if (hasUnlockedAppointment)
@@ -124,25 +150,25 @@ namespace DVLDPresentationLayer
                 return;
             }
 
-            
+            //clsTestAppointment testAppointment = clsTestAppointment.FindTestAppointmentByID((int)dgvAllAppointments.CurrentRow.Cells[0].Value);
+            //bool IsLocked = testAppointment.IsLocked;   
             int testAttemptsCount = _dtAppointments.Rows.Count; // all appointments already filtered by this test
             bool isFirstTime = (testAttemptsCount == 0);
             // Step 3: All checks passed → allow scheduling
-            FrmScheduleTest frmScheduleTest = new FrmScheduleTest(_LDLApplicationID, Test, isFirstTime);
+            FrmScheduleTest frmScheduleTest = new FrmScheduleTest(_LDLApplicationID, Test, isFirstTime, _CountRow);
             frmScheduleTest.ShowDialog();
+
+            _RefreshAppointmentList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clsTestAppointment testAppointment = clsTestAppointment.FindTestAppointmentByID( (int)dgvAllAppointments.CurrentRow.Cells[0].Value);
-            if (testAppointment.IsLocked == true)
-            {
-                MessageBox.Show("Cannot Edit Appointment, Test Already Taken", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            bool IsLocked = testAppointment.IsLocked;
+           
             int testAttemptsCount = _dtAppointments.Rows.Count; // all appointments already filtered by this test
-            bool isFirstTime = (testAttemptsCount == 0);
-            FrmScheduleTest frm = new FrmScheduleTest(_LDLApplicationID, Test, (int)dgvAllAppointments.CurrentRow.Cells[0].Value, isFirstTime);
+            bool isFirstTime = (testAttemptsCount == 1);
+            FrmScheduleTest frm = new FrmScheduleTest(_LDLApplicationID, Test, (int)dgvAllAppointments.CurrentRow.Cells[0].Value, isFirstTime, IsLocked);
             frm.ShowDialog();
             _RefreshAppointmentList();
         }
@@ -173,7 +199,7 @@ namespace DVLDPresentationLayer
             {
                 Test = enTest.Street;
             }
-            frmTakeTest frmTakeTest = new frmTakeTest(_LDLApplicationID, (int)dgvAllAppointments.CurrentRow.Cells[0].Value, Test);
+            frmTakeTest frmTakeTest = new frmTakeTest(_LDLApplicationID, (int)dgvAllAppointments.CurrentRow.Cells[0].Value, Test, _CountRow);
             frmTakeTest.ShowDialog();
             _RefreshAppointmentList();
 

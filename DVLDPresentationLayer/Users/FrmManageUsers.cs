@@ -29,11 +29,20 @@ namespace DVLDPresentationLayer
             int rowCount = dgvAllUsers.Rows.Count;
             lbCountRow.Text = rowCount.ToString();
 
-            dgvAllUsers.Columns["UserID"].Width = 85;
-            dgvAllUsers.Columns["PersonID"].Width = 85;
-            dgvAllUsers.Columns["FullName"].Width = 220;
-            dgvAllUsers.Columns["Username"].Width = 100;
-            dgvAllUsers.Columns["IsActive"].Width = 85;
+            if (dgvAllUsers.Columns.Contains("UserID"))
+                dgvAllUsers.Columns["UserID"].Width = 85;
+
+            if (dgvAllUsers.Columns.Contains("PersonID"))
+                dgvAllUsers.Columns["PersonID"].Width = 85;
+
+            if (dgvAllUsers.Columns.Contains("FullName"))
+                dgvAllUsers.Columns["FullName"].Width = 220;
+
+            if (dgvAllUsers.Columns.Contains("Username"))
+                dgvAllUsers.Columns["Username"].Width = 100;
+
+            if (dgvAllUsers.Columns.Contains("IsActive"))
+                dgvAllUsers.Columns["IsActive"].Width = 85;
         }
         private void FrmManageUsers_Load(object sender, EventArgs e)
         {

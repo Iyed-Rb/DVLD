@@ -44,39 +44,48 @@ namespace DVLDDataAccessLayer
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"	SELECT LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID AS [L.D.LAppID], 
-    LicenseClasses.ClassName AS [Driving Class], People.NationalNo,(People.FirstName + ' ' + People.SecondName + ' '+
-    People.ThirdName + ' '+ People.LastName) AS [FULL Name], 
+            string query = @"SELECT 
+    LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID AS [L.D.LAppID], 
+    LicenseClasses.ClassName AS [Driving Class], 
+    People.NationalNo,
+    (People.FirstName + ' ' + People.SecondName + ' ' + People.ThirdName + ' ' + People.LastName) AS [FULL Name], 
     Applications.ApplicationDate,
+    
     (SELECT COUNT(DISTINCT TestAppointments.TestAppointmentID)
-      FROM TestAppointments INNER JOIN Tests ON TestAppointments.TestAppointmentID = Tests.TestAppointmentID
-      WHERE TestAppointments.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID  
-      AND Tests.TestResult = 1) AS [Passed Tests],
+     FROM TestAppointments 
+     INNER JOIN Tests ON TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+     WHERE TestAppointments.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID  
+       AND Tests.TestResult = 1) AS [Passed Tests], 
 
-    CASE WHEN Applications.ApplicationStatus = 1 THEN 'New'
-      WHEN Applications.ApplicationStatus = 2 THEN 'Canceled' 
-      WHEN Applications.ApplicationStatus = 3 THEN 'Completed' END AS Status
-    FROM LocalDrivingLicenseApplications 
-    LEFT JOIN Applications 
+    CASE 
+        WHEN Applications.ApplicationStatus = 1 THEN 'New'
+        WHEN Applications.ApplicationStatus = 2 THEN 'Canceled' 
+        WHEN Applications.ApplicationStatus = 3 THEN 'Completed' 
+    END AS Status
+
+FROM LocalDrivingLicenseApplications 
+LEFT JOIN Applications 
     ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID 
-    LEFT JOIN LicenseClasses 
-    ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID 
-    LEFT JOIN People 
+LEFT JOIN LicenseClasses 
+    ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID   
+LEFT JOIN People 
     ON Applications.ApplicantPersonID = People.PersonID 
-    LEFT JOIN TestAppointments 
+LEFT JOIN TestAppointments 
     ON LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID 
-    LEFT JOIN Tests 
+LEFT JOIN Tests 
     ON TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+
 GROUP BY 
     LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID,
     LicenseClasses.ClassName,
     People.NationalNo,
-    (People.FirstName + ' ' +
-    People.SecondName + ' '+
-    People.ThirdName + ' '+ 
-    People.LastName),
+    People.FirstName,
+    People.SecondName,
+    People.ThirdName,
+    People.LastName,
     Applications.ApplicationDate,
     Applications.ApplicationStatus";
+
 
             SqlCommand command = new SqlCommand(query, connection);
 

@@ -113,13 +113,12 @@ namespace DVLDPresentationLayer
 
             tbApplicationInfo.Enabled = true;
             tbPersonalInfo.Enabled = true;
-            btSave.Enabled = true;
-
-      
+            cbLicenseClass.Enabled = false;
+            btSave.Enabled = false;
             personCardWithFilter1.groupBox1.Enabled = false;
 
 
-            lbMode.Text = "Update Local Driving License Application";
+            lbMode.Text = "View Local Driving License Application";
 
             lbLDLApplicationID.Text = _LDLApplication.LDLApplicationID.ToString();
             lbApplicationDate.Text = _LDLApplication.Application.ApplicationDate.ToShortDateString();
@@ -141,7 +140,7 @@ namespace DVLDPresentationLayer
         {
             if (_Mode == enMode.Update)
             {
-                btSave.Enabled = true;
+                btSave.Enabled = false;
                 tbApplicationInfo.Enabled = true;
                 tabControl1.SelectedTab = tabControl1.TabPages["tbApplicationInfo"];
                 return;
@@ -176,18 +175,21 @@ namespace DVLDPresentationLayer
                     return;
                 }
             }
-            else if(_Mode == enMode.Update)
-            {
-                if (existingAppID != -1 && existingAppID != _LDLApplication.ApplicationID)
-                {
 
-                    MessageBox.Show(@"Choose Another License Class, the selected Person Already have an active application for the 
-                     selected class with ID = " + existingAppID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            int age = DateTime.Now.Year - _Person.DateOfBirth.Year;
+
+            if (DateTime.Now.Date < _Person.DateOfBirth.Date.AddYears(age))
+            {
+                age--; // Birthday hasn't occurred yet this year
             }
 
+            if (age < _LDLApplication.LicenseClass.MinimumAllowedAge)
+            {
+                MessageBox.Show(@"Person Dotn have the Required Age for this LicenseClass" , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            
             _LDLApplication.LicenseClass.LicenseClassID = cbLicenseClass.SelectedIndex + 1; 
             _LDLApplication.Application.ApplicantPersonID = _PersonID;
          
@@ -198,13 +200,27 @@ namespace DVLDPresentationLayer
             _LDLApplication.Application.CreatedByUserID = clsGlobalSettings.CurrentUser.UserID;
 
 
-            if (_LDLApplication.Save())
-                MessageBox.Show("Data Saved Successfully.");
+            DialogResult res = MessageBox.Show("Are you sure to Confirmyour Choice?\nYou can't Change the LicenseClass After that ", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (res == DialogResult.Yes)
+            {
+                if (_LDLApplication.Save())
+                {
+                    MessageBox.Show("Data Saved Successfully.");
+                }
+
+                else
+                    MessageBox.Show("Error: Data Is not Saved Successfully.");
+            }
             else
-                MessageBox.Show("Error: Data Is not Saved Successfully.");
+            {
+                MessageBox.Show("Operation Cancelled", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+               
+
 
             _Mode = enMode.Update;
-            lbMode.Text = "Update Local Driving License Application";
+            lbMode.Text = "View Local Driving License Application";
             lbLDLApplicationID.Text = _LDLApplication.LDLApplicationID.ToString();
 
         }

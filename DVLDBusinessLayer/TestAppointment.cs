@@ -66,10 +66,12 @@ namespace DVLDBusinessLayer
 
         }
 
-        public static DataTable GetAllAppointmentsByTestTypeID(int TestTypeID, int PersonID)
+        public static DataTable GetAllAppointmentsByTestTypeID(int TestTypeID, int PersonID, int LicenseClassID)
         {
-            return clsTestAppointmentData.GetAllAppointmentsByTestTypeID(TestTypeID, PersonID);
+            return clsTestAppointmentData.GetAllAppointmentsByTestTypeID(TestTypeID, PersonID,LicenseClassID);
         }
+
+
 
         public static clsTestAppointment FindTestAppointmentByID(int TestAppointmentID)
         {

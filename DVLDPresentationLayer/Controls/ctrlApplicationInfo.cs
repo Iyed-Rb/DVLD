@@ -89,6 +89,7 @@ namespace DVLDPresentationLayer.Controls
         private void linkLabelPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmShowDetails frm = new FrmShowDetails(_Person.PersonID);
+            frm.ShowDialog();
         }
     }
 }

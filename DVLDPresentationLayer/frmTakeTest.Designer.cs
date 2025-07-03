@@ -48,7 +48,7 @@
             this.lbDLAppID = new System.Windows.Forms.Label();
             this.lbClassName = new System.Windows.Forms.Label();
             this.lbPersonFullName = new System.Windows.Forms.Label();
-            this.lbCountTests = new System.Windows.Forms.Label();
+            this.lbTrial = new System.Windows.Forms.Label();
             this.lbFees = new System.Windows.Forms.Label();
             this.lbDate = new System.Windows.Forms.Label();
             this.lbTestID = new System.Windows.Forms.Label();
@@ -265,15 +265,15 @@
             this.lbPersonFullName.TabIndex = 110;
             this.lbPersonFullName.Text = "Mohammed Anis";
             // 
-            // lbCountTests
+            // lbTrial
             // 
-            this.lbCountTests.AutoSize = true;
-            this.lbCountTests.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCountTests.Location = new System.Drawing.Point(169, 240);
-            this.lbCountTests.Name = "lbCountTests";
-            this.lbCountTests.Size = new System.Drawing.Size(31, 18);
-            this.lbCountTests.TabIndex = 111;
-            this.lbCountTests.Text = "0/3";
+            this.lbTrial.AutoSize = true;
+            this.lbTrial.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTrial.Location = new System.Drawing.Point(169, 240);
+            this.lbTrial.Name = "lbTrial";
+            this.lbTrial.Size = new System.Drawing.Size(17, 18);
+            this.lbTrial.TabIndex = 111;
+            this.lbTrial.Text = "0";
             // 
             // lbFees
             // 
@@ -433,7 +433,7 @@
             this.Controls.Add(this.lbTestID);
             this.Controls.Add(this.lbDate);
             this.Controls.Add(this.lbFees);
-            this.Controls.Add(this.lbCountTests);
+            this.Controls.Add(this.lbTrial);
             this.Controls.Add(this.lbPersonFullName);
             this.Controls.Add(this.lbClassName);
             this.Controls.Add(this.lbDLAppID);
@@ -493,7 +493,7 @@
         private System.Windows.Forms.Label lbDLAppID;
         private System.Windows.Forms.Label lbClassName;
         private System.Windows.Forms.Label lbPersonFullName;
-        private System.Windows.Forms.Label lbCountTests;
+        private System.Windows.Forms.Label lbTrial;
         private System.Windows.Forms.Label lbFees;
         private System.Windows.Forms.Label lbDate;
         private System.Windows.Forms.Label lbTestID;

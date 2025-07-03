@@ -10,23 +10,26 @@ namespace DVLDDataAccessLayer
 {
     public class clsTestAppointmentData
     {
-        public static DataTable GetAllAppointmentsByTestTypeID(int TestTypeID, int PersonID)
+        public static DataTable GetAllAppointmentsByTestTypeID(int TestTypeID, int PersonID, int LicenseClassID)
         {
 
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select T.TestAppointmentID,T.AppointmentDate,T.PaidFees, T.IsLocked, T.TestTypeID from TestAppointments T
+            string query = @"select T.TestAppointmentID as [Appointment ID],T.AppointmentDate as [Appointment Date],T.PaidFees
+    as [Paid Fees], T.IsLocked as [Is Locked] from TestAppointments T
 	Inner Join LocalDrivingLicenseApplications L On T.LocalDrivingLicenseApplicationID = L.LocalDrivingLicenseApplicationID
 	Inner Join Applications A On A.ApplicationID = L.ApplicationID
 	Inner Join People P On P.PersonID = A.ApplicantPersonID
-	where T.TestTypeID = @TestTypeID and PersonID = @PersonID";
+	where T.TestTypeID = @TestTypeID and PersonID = @PersonID  and L.LicenseClassID = @LicenseClassID";
 
 
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
             command.Parameters.AddWithValue("@PersonID", PersonID);
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+
 
             try
             {

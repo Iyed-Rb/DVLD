@@ -81,6 +81,7 @@
             this.dgvAllLDLApplications.Name = "dgvAllLDLApplications";
             this.dgvAllLDLApplications.Size = new System.Drawing.Size(952, 229);
             this.dgvAllLDLApplications.TabIndex = 2;
+            this.dgvAllLDLApplications.SelectionChanged += new System.EventHandler(this.dgvAllLDLApplications_SelectionChanged);
             // 
             // contextMenuStrip1
             // 
@@ -99,7 +100,7 @@
             this.showLicenseToolStripMenuItem,
             this.showLicenseToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(259, 360);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(259, 338);
             // 
             // showDetailsToolStripMenuItem
             // 
@@ -122,7 +123,7 @@
             this.editToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(258, 38);
-            this.editToolStripMenuItem.Text = "Edit Application";
+            this.editToolStripMenuItem.Text = "View Application";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -164,7 +165,6 @@
             this.scheduleTestToolStripMenuItem.Name = "scheduleTestToolStripMenuItem";
             this.scheduleTestToolStripMenuItem.Size = new System.Drawing.Size(258, 38);
             this.scheduleTestToolStripMenuItem.Text = "schedule Tests";
-            this.scheduleTestToolStripMenuItem.DropDownOpening += new System.EventHandler(this.scheduleTestToolStripMenuItem_DropDownOpening);
             // 
             // scheduleVisionTestToolStripMenuItem
             // 

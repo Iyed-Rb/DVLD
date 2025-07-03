@@ -25,12 +25,14 @@ namespace DVLDPresentationLayer
         clsTestAppointment _TestAppointment;
 
         clsTest _Test;
-        public frmTakeTest(int LDLApplicationID, int TestAppointmentID, enTest test)
+        int _CountRow;
+        public frmTakeTest(int LDLApplicationID, int TestAppointmentID, enTest test, int countRow)
         {
             InitializeComponent();
             _LDLApplicationID = LDLApplicationID;
             _TestAppointmentID = TestAppointmentID;
             eTest = test;
+            _CountRow = countRow;
         }
 
         public enTest eTest;
@@ -53,8 +55,8 @@ namespace DVLDPresentationLayer
             _Person = clsPerson.FindPersonByID(_LDLApplication.Application.ApplicantPersonID);
             lbPersonFullName.Text = _Person.FirstName + " " + _Person.SecondName + " " + _Person.ThirdName + " " + _Person.LastName;
 
-            int PassedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
-            lbCountTests.Text = PassedTests.ToString();
+            //int PassedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
+            lbTrial.Text = _CountRow.ToString();
 
             lbDate.Text = DateTime.Now.ToString();
 

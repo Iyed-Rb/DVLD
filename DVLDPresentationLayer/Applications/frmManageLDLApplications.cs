@@ -21,6 +21,8 @@ namespace DVLDPresentationLayer
         }
         DataTable _dtLDLApplications;
 
+        
+
         //int _PassedTests;
         //int _LDLApplicationID;
         private void _RefreshApplicationList()
@@ -31,15 +33,29 @@ namespace DVLDPresentationLayer
             int rowCount = dgvAllLDLApplications.Rows.Count;
             lbCountRow.Text = rowCount.ToString();
 
-            dgvAllLDLApplications.Columns["L.D.LAppID"].Width = 90;
-            dgvAllLDLApplications.Columns["Driving Class"].Width = 190;
-            dgvAllLDLApplications.Columns["NationalNo"].Width = 90;
-            dgvAllLDLApplications.Columns["Full Name"].Width = 230;
-            dgvAllLDLApplications.Columns["ApplicationDate"].Width = 110;
-            dgvAllLDLApplications.Columns["Passed Tests"].Width = 100;
-            dgvAllLDLApplications.Columns["Status"].Width = 90;
+            if (dgvAllLDLApplications.Columns.Contains("L.D.LAppID"))
+                dgvAllLDLApplications.Columns["L.D.LAppID"].Width = 90;
 
-            
+            if (dgvAllLDLApplications.Columns.Contains("Driving Class"))
+                dgvAllLDLApplications.Columns["Driving Class"].Width = 190;
+
+            if (dgvAllLDLApplications.Columns.Contains("NationalNo"))
+                dgvAllLDLApplications.Columns["NationalNo"].Width = 90;
+
+            if (dgvAllLDLApplications.Columns.Contains("Full Name"))
+                dgvAllLDLApplications.Columns["Full Name"].Width = 230;
+
+            if (dgvAllLDLApplications.Columns.Contains("ApplicationDate"))
+                dgvAllLDLApplications.Columns["ApplicationDate"].Width = 110;
+
+            if (dgvAllLDLApplications.Columns.Contains("Passed Tests"))
+                dgvAllLDLApplications.Columns["Passed Tests"].Width = 100;
+
+            if (dgvAllLDLApplications.Columns.Contains("Status"))
+                dgvAllLDLApplications.Columns["Status"].Width = 90;
+
+
+
 
             if (dgvAllLDLApplications.Rows.Count > 0)
             {
@@ -59,27 +75,43 @@ namespace DVLDPresentationLayer
             //int passedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
             /*MessageBox.Show("PassedTests = " + PassedTests);*/ // ✅ check 
 
-            switch (PassedTests)
+            
+                switch (PassedTests)
             {
                 case 0:
+                 
                     scheduleVisionTestToolStripMenuItem.Enabled = true;
                     scheduleWrittenTestToolStripMenuItem.Enabled = false;
                     scheduleStreetTestToolStripMenuItem.Enabled = false;
+                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
                     break;
                 case 1:
+                
                     scheduleVisionTestToolStripMenuItem.Enabled = false;
                     scheduleWrittenTestToolStripMenuItem.Enabled = true;
                     scheduleStreetTestToolStripMenuItem.Enabled = false;
+                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
                     break;
                 case 2:
+                    
                     scheduleVisionTestToolStripMenuItem.Enabled = false;
                     scheduleWrittenTestToolStripMenuItem.Enabled = false;
                     scheduleStreetTestToolStripMenuItem.Enabled = true;
+                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
                     break;
-                default:
+                case 3:
+                    
                     scheduleVisionTestToolStripMenuItem.Enabled = false;
                     scheduleWrittenTestToolStripMenuItem.Enabled = false;
                     scheduleStreetTestToolStripMenuItem.Enabled = false;
+                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
+                    break;
+                default:
+                    MessageBox.Show("Default case: Invalid PassedTests = " + PassedTests);
+                    scheduleVisionTestToolStripMenuItem.Enabled = false;
+                    scheduleWrittenTestToolStripMenuItem.Enabled = false;
+                    scheduleStreetTestToolStripMenuItem.Enabled = false;
+                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
                     break;
             }
         }
@@ -114,6 +146,20 @@ namespace DVLDPresentationLayer
         
         private void btLDLApplication_Click(object sender, EventArgs e)
         {
+            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+
+            string NationalNo = (string)dgvAllLDLApplications.CurrentRow.Cells[1].Value;
+            clsPerson Person = clsPerson.FindPersonByNationalNO(NationalNo);
+
+
+            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             AddEditLDLApplications frmAddEditLDLApplications = new AddEditLDLApplications();
             frmAddEditLDLApplications.ShowDialog();
             _RefreshApplicationList();
@@ -121,6 +167,17 @@ namespace DVLDPresentationLayer
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+
+            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             AddEditLDLApplications frmAddEditLDLApplications = new AddEditLDLApplications((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
             frmAddEditLDLApplications.ShowDialog();
             _RefreshApplicationList();
@@ -195,13 +252,30 @@ namespace DVLDPresentationLayer
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
 
+            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clsLDLApplication LDLApplication;
             LDLApplication = clsLDLApplication.FindLDLApplicationByID((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
+
+   
+
+            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (LDLApplication == null)
             {
@@ -232,6 +306,7 @@ namespace DVLDPresentationLayer
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             if (dgvAllLDLApplications.CurrentRow == null)
             {
                 MessageBox.Show("Please select a valid application to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -240,6 +315,13 @@ namespace DVLDPresentationLayer
 
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
             clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+
+            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (LDLApplication == null)
             {
@@ -269,29 +351,58 @@ namespace DVLDPresentationLayer
 
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+
+            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Vision);
             frmTestAppointment.ShowDialog();
+            _RefreshApplicationList();
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+
+            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Written);
             frmTestAppointment.ShowDialog();
+            _RefreshApplicationList();
         }
 
         private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+            
+            if (LDLApplication.Application.ApplicationStatus == 2 ) // Canceled
+            {
+
+                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
+            }
+
             frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Street);
             frmTestAppointment.ShowDialog();
+            _RefreshApplicationList();
         }
 
-        private void scheduleTestToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        private void dgvAllLDLApplications_SelectionChanged(object sender, EventArgs e)
         {
             Show();
         }

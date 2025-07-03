@@ -39,7 +39,7 @@
             this.lbDLAppID = new System.Windows.Forms.Label();
             this.lbClassName = new System.Windows.Forms.Label();
             this.lbPersonFullName = new System.Windows.Forms.Label();
-            this.lbCountTests = new System.Windows.Forms.Label();
+            this.lbTrial = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.lbFees = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -62,6 +62,7 @@
             this.btCLose = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
             this.TestfrmScheduleTest = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -72,6 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.TestfrmScheduleTest.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -79,7 +81,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(163, 127);
+            this.label1.Location = new System.Drawing.Point(151, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(163, 25);
             this.label1.TabIndex = 3;
@@ -175,15 +177,15 @@
             this.lbPersonFullName.TabIndex = 97;
             this.lbPersonFullName.Text = "Mohammed Anis";
             // 
-            // lbCountTests
+            // lbTrial
             // 
-            this.lbCountTests.AutoSize = true;
-            this.lbCountTests.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCountTests.Location = new System.Drawing.Point(156, 255);
-            this.lbCountTests.Name = "lbCountTests";
-            this.lbCountTests.Size = new System.Drawing.Size(31, 18);
-            this.lbCountTests.TabIndex = 98;
-            this.lbCountTests.Text = "0/3";
+            this.lbTrial.AutoSize = true;
+            this.lbTrial.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTrial.Location = new System.Drawing.Point(156, 255);
+            this.lbTrial.Name = "lbTrial";
+            this.lbTrial.Size = new System.Drawing.Size(17, 18);
+            this.lbTrial.TabIndex = 98;
+            this.lbTrial.Text = "0";
             // 
             // dateTimePicker1
             // 
@@ -366,9 +368,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::DVLDPresentationLayer.Properties.Resources.Vision_512;
-            this.pictureBox1.Location = new System.Drawing.Point(182, 33);
+            this.pictureBox1.Location = new System.Drawing.Point(181, 14);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(99, 91);
+            this.pictureBox1.Size = new System.Drawing.Size(96, 77);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -403,6 +405,9 @@
             // 
             // TestfrmScheduleTest
             // 
+            this.TestfrmScheduleTest.Controls.Add(this.label11);
+            this.TestfrmScheduleTest.Controls.Add(this.pictureBox1);
+            this.TestfrmScheduleTest.Controls.Add(this.label1);
             this.TestfrmScheduleTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TestfrmScheduleTest.Location = new System.Drawing.Point(12, 12);
             this.TestfrmScheduleTest.Name = "TestfrmScheduleTest";
@@ -410,6 +415,17 @@
             this.TestfrmScheduleTest.TabIndex = 126;
             this.TestfrmScheduleTest.TabStop = false;
             this.TestfrmScheduleTest.Text = "VisionTest";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(54, 119);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(413, 18);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Person already sat for the Test, Appointment Loacked";
             // 
             // FrmScheduleTest
             // 
@@ -430,7 +446,7 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lbFees);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.lbCountTests);
+            this.Controls.Add(this.lbTrial);
             this.Controls.Add(this.lbPersonFullName);
             this.Controls.Add(this.lbClassName);
             this.Controls.Add(this.lbDLAppID);
@@ -446,8 +462,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.TestfrmScheduleTest);
             this.Name = "FrmScheduleTest";
@@ -463,6 +477,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.TestfrmScheduleTest.ResumeLayout(false);
+            this.TestfrmScheduleTest.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,7 +503,7 @@
         private System.Windows.Forms.Label lbDLAppID;
         private System.Windows.Forms.Label lbClassName;
         private System.Windows.Forms.Label lbPersonFullName;
-        private System.Windows.Forms.Label lbCountTests;
+        private System.Windows.Forms.Label lbTrial;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label lbFees;
         private System.Windows.Forms.Label label8;
@@ -503,5 +519,6 @@
         private System.Windows.Forms.Button btCLose;
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.GroupBox TestfrmScheduleTest;
+        private System.Windows.Forms.Label label11;
     }
 }
