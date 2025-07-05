@@ -232,7 +232,6 @@ namespace DVLDPresentationLayer
 
             }
 
-
         }
 
         private string GetImageFullPath(string imageFileName)

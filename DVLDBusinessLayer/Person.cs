@@ -31,6 +31,15 @@ namespace DVLDBusinessLayer
         public int NationalityCountryID { set; get; }
         public string ImagePath { set; get; }
 
+
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {SecondName} {ThirdName} {LastName}";
+            }
+        }
+
         public clsPerson()
 
         {

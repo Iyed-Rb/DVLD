@@ -94,6 +94,30 @@
     <Compile Include="Controls\PersonCardWithFilter.Designer.cs">
       <DependentUpon>PersonCardWithFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="ctrlLicenseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctrlLicenseInfo.Designer.cs">
+      <DependentUpon>ctrlLicenseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDriversList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDriversList.Designer.cs">
+      <DependentUpon>frmDriversList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLicenseFirstTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLicenseFirstTime.Designer.cs">
+      <DependentUpon>frmLicenseFirstTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLicenseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLicenseInfo.Designer.cs">
+      <DependentUpon>frmLicenseInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmScheduleTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +227,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PersonCardWithFilter.resx">
       <DependentUpon>PersonCardWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctrlLicenseInfo.resx">
+      <DependentUpon>ctrlLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDriversList.resx">
+      <DependentUpon>frmDriversList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLicenseFirstTime.resx">
+      <DependentUpon>frmLicenseFirstTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLicenseInfo.resx">
+      <DependentUpon>frmLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmScheduleTest.resx">
       <DependentUpon>FrmScheduleTest.cs</DependentUpon>

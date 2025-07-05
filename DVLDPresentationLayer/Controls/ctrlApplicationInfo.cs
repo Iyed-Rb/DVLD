@@ -91,5 +91,10 @@ namespace DVLDPresentationLayer.Controls
             FrmShowDetails frm = new FrmShowDetails(_Person.PersonID);
             frm.ShowDialog();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

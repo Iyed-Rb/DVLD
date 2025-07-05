@@ -65,58 +65,203 @@ namespace DVLDPresentationLayer
 
         }
 
+        //private void Show()
+        //{
+        //    if (dgvAllLDLApplications.CurrentRow == null)
+        //        return;
+
+        //    int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
+        //    int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+        //    //int passedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
+        //    //MessageBox.Show("PassedTests = " + PassedTests);
+
+        //    clsLDLApplication lDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+        //    clsApplication application = clsApplication.FindApplicationByID(lDLApplication.ApplicationID);
+
+        //    if (application.ApplicationStatus == 2) // Canceled
+        //    {
+        //        MessageBox.Show("This Application Is Cancelled ","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        //        scheduleTestToolStripMenuItem.Enabled = false;
+        //        scheduleVisionTestToolStripMenuItem.Enabled = false;
+        //        scheduleWrittenTestToolStripMenuItem.Enabled = false;
+        //        scheduleStreetTestToolStripMenuItem.Enabled = false;
+
+        //        issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+
+        //        deleteToolStripMenuItem.Enabled = false;
+        //        cancelApplicationToolStripMenuItem.Enabled = false;
+        //        editToolStripMenuItem.Enabled = false;
+
+        //        showLicenseToolStripMenuItem.Enabled = false;
+
+        //        return;
+        //    }
+
+        //        switch (PassedTests)
+        //    {
+        //        case 0:
+        //            scheduleTestToolStripMenuItem.Enabled = true;
+        //            scheduleVisionTestToolStripMenuItem.Enabled = true;
+        //            scheduleWrittenTestToolStripMenuItem.Enabled = false;
+        //            scheduleStreetTestToolStripMenuItem.Enabled = false;
+
+        //            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+
+        //            deleteToolStripMenuItem.Enabled = true;
+        //            cancelApplicationToolStripMenuItem.Enabled = true;
+        //            editToolStripMenuItem.Enabled = true;
+
+        //            break;
+        //        case 1:
+        //            scheduleTestToolStripMenuItem.Enabled = true;
+        //            scheduleVisionTestToolStripMenuItem.Enabled = false;
+        //            scheduleWrittenTestToolStripMenuItem.Enabled = true;
+        //            scheduleStreetTestToolStripMenuItem.Enabled = false;
+
+        //            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+
+        //            deleteToolStripMenuItem.Enabled = true;
+        //            cancelApplicationToolStripMenuItem.Enabled = true;
+        //            editToolStripMenuItem.Enabled = true;
+
+        //            break;
+        //        case 2:
+        //            scheduleTestToolStripMenuItem.Enabled = true;
+        //            scheduleVisionTestToolStripMenuItem.Enabled = false;
+        //            scheduleWrittenTestToolStripMenuItem.Enabled = false;
+        //            scheduleStreetTestToolStripMenuItem.Enabled = true;
+
+        //            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+
+        //            deleteToolStripMenuItem.Enabled = true;
+        //            cancelApplicationToolStripMenuItem.Enabled = true;
+        //            editToolStripMenuItem.Enabled = true;
+        //            break;
+        //        case 3:
+        //            scheduleTestToolStripMenuItem.Enabled = false;
+        //            scheduleVisionTestToolStripMenuItem.Enabled = false;
+        //            scheduleWrittenTestToolStripMenuItem.Enabled = false;
+        //            scheduleStreetTestToolStripMenuItem.Enabled = false;
+
+        //            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
+
+        //            deleteToolStripMenuItem.Enabled = false;
+        //            cancelApplicationToolStripMenuItem.Enabled = false;
+        //            editToolStripMenuItem.Enabled = false;
+
+
+        //            break;
+        //        default:
+        //            MessageBox.Show("Default case: Invalid PassedTests = " + PassedTests);
+        //            scheduleVisionTestToolStripMenuItem.Enabled = false;
+        //            scheduleWrittenTestToolStripMenuItem.Enabled = false;
+        //            scheduleStreetTestToolStripMenuItem.Enabled = false;
+        //            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+        //            deleteToolStripMenuItem.Enabled = false;
+
+        //            break;
+        //    }
+
+        //    //clsPerson Person = clsPerson.FindPersonByNationalNO((string)dgvAllLDLApplications.CurrentRow.Cells[2].Value);
+
+
+        //    clsLicense license = clsLicense.FindLicenseByApplicationID(lDLApplication.ApplicationID);
+        //    if (license != null)
+        //    {
+        //        showLicenseToolStripMenuItem.Enabled = true;
+        //        issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+        //    }
+        //    else
+        //    {
+        //        showLicenseToolStripMenuItem.Enabled = false;
+        //        //issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+        //    }
+        //}
+
+        private void DisableAllMenuItems()
+        {
+            // Disable everything related to the application
+            scheduleTestToolStripMenuItem.Enabled = false;
+            scheduleVisionTestToolStripMenuItem.Enabled = false;
+            scheduleWrittenTestToolStripMenuItem.Enabled = false;
+            scheduleStreetTestToolStripMenuItem.Enabled = false;
+
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+            deleteToolStripMenuItem.Enabled = false;
+            cancelApplicationToolStripMenuItem.Enabled = false;
+            editToolStripMenuItem.Enabled = false;
+            showLicenseToolStripMenuItem.Enabled = false;
+        }
+
+        private void EnableMenuItemsBasedOnPassedTests(int passedTests)
+        {
+            // First reset everything
+            DisableAllMenuItems();
+
+            switch (passedTests)
+            {
+                case 0:
+                    scheduleTestToolStripMenuItem.Enabled = true;
+                    scheduleVisionTestToolStripMenuItem.Enabled = true;
+                    deleteToolStripMenuItem.Enabled = true;
+                    cancelApplicationToolStripMenuItem.Enabled = true;
+                    editToolStripMenuItem.Enabled = true;
+                    break;
+
+                case 1:
+                    scheduleTestToolStripMenuItem.Enabled = true;
+                    scheduleWrittenTestToolStripMenuItem.Enabled = true;
+                    deleteToolStripMenuItem.Enabled = true;
+                    cancelApplicationToolStripMenuItem.Enabled = true;
+                    editToolStripMenuItem.Enabled = true;
+                    break;
+
+                case 2:
+                    scheduleTestToolStripMenuItem.Enabled = true;
+                    scheduleStreetTestToolStripMenuItem.Enabled = true;
+                    deleteToolStripMenuItem.Enabled = true;
+                    cancelApplicationToolStripMenuItem.Enabled = true;
+                    editToolStripMenuItem.Enabled = true;
+                    break;
+
+                case 3:
+                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
+                    break;
+
+                default:
+                    MessageBox.Show("Invalid PassedTests = " + passedTests, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+            }
+        }
+
         private void Show()
         {
             if (dgvAllLDLApplications.CurrentRow == null)
                 return;
 
-            int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
-            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
-            //int passedTests = clsLDLApplication.GetPassedTestsCount(_LDLApplicationID);
-            /*MessageBox.Show("PassedTests = " + PassedTests);*/ // ✅ check 
+            int passedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
+            int ldlApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
 
-            
-                switch (PassedTests)
+            clsLDLApplication lDLApplication = clsLDLApplication.FindLDLApplicationByID(ldlApplicationID);
+            clsApplication application = clsApplication.FindApplicationByID(lDLApplication.ApplicationID);
+
+            if (application.ApplicationStatus == 2) // Cancelled
             {
-                case 0:
-                 
-                    scheduleVisionTestToolStripMenuItem.Enabled = true;
-                    scheduleWrittenTestToolStripMenuItem.Enabled = false;
-                    scheduleStreetTestToolStripMenuItem.Enabled = false;
-                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
-                    break;
-                case 1:
-                
-                    scheduleVisionTestToolStripMenuItem.Enabled = false;
-                    scheduleWrittenTestToolStripMenuItem.Enabled = true;
-                    scheduleStreetTestToolStripMenuItem.Enabled = false;
-                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
-                    break;
-                case 2:
-                    
-                    scheduleVisionTestToolStripMenuItem.Enabled = false;
-                    scheduleWrittenTestToolStripMenuItem.Enabled = false;
-                    scheduleStreetTestToolStripMenuItem.Enabled = true;
-                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
-                    break;
-                case 3:
-                    
-                    scheduleVisionTestToolStripMenuItem.Enabled = false;
-                    scheduleWrittenTestToolStripMenuItem.Enabled = false;
-                    scheduleStreetTestToolStripMenuItem.Enabled = false;
-                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
-                    break;
-                default:
-                    MessageBox.Show("Default case: Invalid PassedTests = " + PassedTests);
-                    scheduleVisionTestToolStripMenuItem.Enabled = false;
-                    scheduleWrittenTestToolStripMenuItem.Enabled = false;
-                    scheduleStreetTestToolStripMenuItem.Enabled = false;
-                    issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
-                    break;
+                //MessageBox.Show("This Application Is Cancelled", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisableAllMenuItems();
+                return;
             }
+
+            EnableMenuItemsBasedOnPassedTests(passedTests);
+
+            clsLicense license = clsLicense.FindLicenseByApplicationID(lDLApplication.ApplicationID);
+            showLicenseToolStripMenuItem.Enabled = (license != null);
+            if (license != null)
+                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
         }
 
-          
+
         private void frmManageLDLApplications_Load(object sender, EventArgs e)
         {
 
@@ -142,23 +287,14 @@ namespace DVLDPresentationLayer
             //MessageBox.Show("PassedTest count: " + PassedTest);
 
         }
-
-        
         private void btLDLApplication_Click(object sender, EventArgs e)
         {
-            int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
-            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+            //int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
+            //clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
 
-            string NationalNo = (string)dgvAllLDLApplications.CurrentRow.Cells[1].Value;
-            clsPerson Person = clsPerson.FindPersonByNationalNO(NationalNo);
+            //string NationalNo = (string)dgvAllLDLApplications.CurrentRow.Cells[1].Value;
+            //clsPerson Person = clsPerson.FindPersonByNationalNO(NationalNo);
 
-
-            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             AddEditLDLApplications frmAddEditLDLApplications = new AddEditLDLApplications();
             frmAddEditLDLApplications.ShowDialog();
@@ -169,14 +305,6 @@ namespace DVLDPresentationLayer
         {
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
             clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
-
-            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
 
             AddEditLDLApplications frmAddEditLDLApplications = new AddEditLDLApplications((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
             frmAddEditLDLApplications.ShowDialog();
@@ -255,12 +383,6 @@ namespace DVLDPresentationLayer
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
             clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
 
-            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
         }
 
         private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,14 +390,7 @@ namespace DVLDPresentationLayer
             clsLDLApplication LDLApplication;
             LDLApplication = clsLDLApplication.FindLDLApplicationByID((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
 
-   
-
-            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+  
 
             if (LDLApplication == null)
             {
@@ -316,12 +431,7 @@ namespace DVLDPresentationLayer
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
             clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
 
-            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+        
 
             if (LDLApplication == null)
             {
@@ -354,14 +464,8 @@ namespace DVLDPresentationLayer
 
             int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
-            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
 
-            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+           
             frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Vision);
             frmTestAppointment.ShowDialog();
             _RefreshApplicationList();
@@ -371,14 +475,8 @@ namespace DVLDPresentationLayer
         {
             int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
-            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
 
-            if (LDLApplication.Application.ApplicationStatus == 2) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            
             frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Written);
             frmTestAppointment.ShowDialog();
             _RefreshApplicationList();
@@ -388,14 +486,7 @@ namespace DVLDPresentationLayer
         {
             int PassedTests = (int)dgvAllLDLApplications.CurrentRow.Cells[5].Value;
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
-            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
             
-            if (LDLApplication.Application.ApplicationStatus == 2 ) // Canceled
-            {
-
-                MessageBox.Show("this Application Is Cancelled\nYou cant Perfrom Operation on it ", "Eror", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
-            }
 
             frmTestAppointment frmTestAppointment = new frmTestAppointment(LDLApplicationID, PassedTests, enTest.Street);
             frmTestAppointment.ShowDialog();
@@ -405,6 +496,21 @@ namespace DVLDPresentationLayer
         private void dgvAllLDLApplications_SelectionChanged(object sender, EventArgs e)
         {
             Show();
+        }
+
+        private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLicenseFirstTime frmLicenseFirstTime = new frmLicenseFirstTime((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
+            
+            frmLicenseFirstTime.ShowDialog();
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLicenseInfo frmLicenseInfo = new frmLicenseInfo((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
+ 
+            frmLicenseInfo.ShowDialog();
+            _RefreshApplicationList();
         }
     }
 }

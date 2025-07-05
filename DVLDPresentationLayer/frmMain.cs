@@ -78,5 +78,12 @@ namespace DVLDPresentationLayer
         {
             
         }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDriversList frmDriversList = new frmDriversList();
+            frmDriversList.ShowDialog();
+
+        }
     }
 }

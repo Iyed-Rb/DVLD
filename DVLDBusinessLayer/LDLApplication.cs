@@ -19,7 +19,18 @@ namespace DVLDBusinessLayer
 
         public clsLicenseClass LicenseClass { get; set; }
 
-        public int ApplicationID => Application.ApplicationID;
+        public int ApplicationID
+        {
+            get => Application.ApplicationID;
+            set
+            {
+                if (Application == null)
+                    Application = new clsApplication();
+
+                Application.ApplicationID = value;
+            }
+        }
+
         public int LicenseClassID => LicenseClass.LicenseClassID;
 
 

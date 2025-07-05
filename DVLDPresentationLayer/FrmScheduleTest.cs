@@ -104,6 +104,8 @@ namespace DVLDPresentationLayer
                 if (currentDate > latestDate)
                     latestDate = currentDate;
             }
+            if (latestDate < DateTimePicker.MinimumDateTime)
+                return DateTime.Today;
 
             return latestDate;
         }
