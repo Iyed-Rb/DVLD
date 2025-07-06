@@ -68,6 +68,8 @@
             this.linkLabelPersonInfo = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
+            this.linkLabelLicenseInfo = new System.Windows.Forms.LinkLabel();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -80,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -256,6 +259,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBox12);
+            this.groupBox1.Controls.Add(this.linkLabelLicenseInfo);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Controls.Add(this.lbDLAppID);
@@ -457,6 +462,27 @@
             this.groupBox2.Text = "Application Basic Info";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // linkLabelLicenseInfo
+            // 
+            this.linkLabelLicenseInfo.AutoSize = true;
+            this.linkLabelLicenseInfo.Location = new System.Drawing.Point(90, 64);
+            this.linkLabelLicenseInfo.Name = "linkLabelLicenseInfo";
+            this.linkLabelLicenseInfo.Size = new System.Drawing.Size(124, 18);
+            this.linkLabelLicenseInfo.TabIndex = 80;
+            this.linkLabelLicenseInfo.TabStop = true;
+            this.linkLabelLicenseInfo.Text = "Show license Info";
+            this.linkLabelLicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLicenseInfo_LinkClicked);
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
+            this.pictureBox12.Location = new System.Drawing.Point(62, 64);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(22, 22);
+            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox12.TabIndex = 81;
+            this.pictureBox12.TabStop = false;
+            // 
             // ctrlApplicationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,6 +530,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -549,5 +576,7 @@
         private System.Windows.Forms.LinkLabel linkLabelPersonInfo;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.ComponentModel.BackgroundWorker backgroundWorker3;
+        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.LinkLabel linkLabelLicenseInfo;
     }
 }

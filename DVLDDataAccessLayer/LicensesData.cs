@@ -2,27 +2,88 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLDDataAccessLayer
 {
     public class clsLicensesData
     {
 
-        public static DataTable GetAllLicences()
+        public static DataTable GetAllInternationalLicencesByPersonID(int PersonID)
         {
 
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @" select Licenses.LicenseID as [Lic.ID], Licenses.ApplicationID, LicenseClasses.ClassName as ClassName,
- Licenses.IssueDate as [Issue Date],Licenses.ExpirationDate as [Expiration Date],
- Licenses.IsActive as [Is Active] from Licenses inner Join LicenseClasses
- ON Licenses.LicenseClass = LicenseClasses.LicenseClassID";
+            string query = @" select I.InternationalLicenseID as [Int.License ID], I.ApplicationID as [Application ID], I.IssuedUsingLocalLicenseID as [L.License ID],
+I.IssueDate as [Issue Date], I.ExpirationDate as [Expiration Date], I.IsActive as [Is Active]
+  from InternationalLicenses I inner Join Applications On I.ApplicationID = Applications.ApplicationID
+  where Applications.ApplicantPersonID = @PersonID";
 
             SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+
+                {
+                    dt.Load(reader);
+                    Debug.WriteLine("✅ Rows returned for PersonID = " + PersonID);
+                    Debug.WriteLine("Total rows loaded: " + dt.Rows.Count);
+
+                }
+                else
+                {
+
+
+                    Debug.WriteLine("❌ No rows returned for PersonID = " + PersonID);
+
+                }
+
+                reader.Close();
+
+
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("Query failed: " + ex.Message, ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+
+        }
+
+
+        public static DataTable GetAllLocalLicencesByPersonID(int PersonID)
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @" select Licenses.LicenseID as [Lic.ID], Licenses.ApplicationID as [App.ID], LicenseClasses.ClassName as [Class Name],
+ Licenses.IssueDate as [Issue Date],Licenses.ExpirationDate as [Expiration Date],
+ Licenses.IsActive as [Is Active] from Licenses inner Join LicenseClasses
+ ON Licenses.LicenseClassID = LicenseClasses.LicenseClassID
+ Inner Join Applications On Applications.ApplicationID = Licenses.ApplicationID
+ Inner Join LocalDrivingLicenseApplications L On L.ApplicationID = Applications.ApplicationID
+ where Applications.ApplicantPersonID = @PersonID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
 
             try
             {
@@ -258,6 +319,12 @@ namespace DVLDDataAccessLayer
 
             return (rowsAffected > 0);
         }
+
+
+
+
+
+
 
 
     }

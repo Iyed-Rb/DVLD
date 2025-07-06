@@ -51,24 +51,9 @@ namespace DVLDPresentationLayer
                 return;
             }
 
-            if (_LDLApplication.Application.ApplicantPersonID <= 0)
-            {
-                MessageBox.Show("Invalid Person ID " + _LDLApplication.Application.ApplicantPersonID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            MessageBox.Show("Person ID: " + _LDLApplication.Application.ApplicantPersonID);
-
-            var person = clsPerson.FindPersonByID(_LDLApplication.Application.ApplicantPersonID);
-            if (person == null)
-            {
-                MessageBox.Show("Person with ID " + _LDLApplication.Application.ApplicantPersonID + " does not exist!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             if (!clsDriver.IsDriverExistByPersonID(_LDLApplication.Application.ApplicantPersonID))
             {
-                MessageBox.Show("Driver doesnt exixst before", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Driver doesnt exixst before", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 clsDriver Driver = new clsDriver();
                 Driver.PersonID = _LDLApplication.Application.ApplicantPersonID;
@@ -78,12 +63,13 @@ namespace DVLDPresentationLayer
             }
             else
             {
-                MessageBox.Show("Driver exixst before", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Driver exixst before", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 clsDriver Driver = clsDriver.FindDriverByPersonID(_LDLApplication.Application.ApplicantPersonID);
+
                 License.Driver = Driver;
 
             }
-            
+
 
 
             License.LicenseClassID = _LDLApplication.LicenseClassID;

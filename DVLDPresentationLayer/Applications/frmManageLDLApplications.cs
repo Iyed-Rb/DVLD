@@ -381,7 +381,10 @@ namespace DVLDPresentationLayer
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int LDLApplicationID = (int)dgvAllLDLApplications.CurrentRow.Cells[0].Value;
-            clsLDLApplication LDLApplication = clsLDLApplication.FindLDLApplicationByID(LDLApplicationID);
+        
+
+            frmLDLApplicationInfo frmLDLApplicationInfo = new frmLDLApplicationInfo(LDLApplicationID);
+            frmLDLApplicationInfo.ShowDialog();
 
         }
 
@@ -511,6 +514,17 @@ namespace DVLDPresentationLayer
  
             frmLicenseInfo.ShowDialog();
             _RefreshApplicationList();
+        }
+
+        private void showLicenseToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmLicenseHistory licenseHistory = new frmLicenseHistory((string)dgvAllLDLApplications.CurrentRow.Cells[2].Value);
+            licenseHistory.ShowDialog();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DVLDDataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
@@ -32,10 +33,11 @@ namespace DVLDBusinessLayer
             get => Driver.DriverID;
             set
             {
+              
+                Driver = clsDriver.FindDriverByID(value);
+
                 if (Driver == null)
                     Driver = new clsDriver();
-
-                Driver.DriverID = value;
             }
         }
 
@@ -73,6 +75,17 @@ namespace DVLDBusinessLayer
 
             Mode = enMode.Update;
         }
+
+        public static DataTable GetAllLicensesList(int PersonID)
+        {
+            return clsLicensesData.GetAllLocalLicencesByPersonID(PersonID);  
+        }
+
+        public static DataTable GetAllInternationalLicenses(int PersonID)
+        {
+            return clsLicensesData.GetAllInternationalLicencesByPersonID(PersonID);  
+        }   
+
 
         public static clsLicense FindLicenseByID(int LicenseID)
         {
@@ -143,6 +156,8 @@ namespace DVLDBusinessLayer
                 return null;
 
         }
+
+        
         public bool Save()
         {
             switch (Mode)

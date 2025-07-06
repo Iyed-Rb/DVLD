@@ -67,6 +67,13 @@ namespace DVLDPresentationLayer.Controls
             clsUser User = clsUser.FindUserByID(_LDLApplication.Application.CreatedByUserID);
             lbCreatedByUserID.Text = User.UserName;
 
+            clsLicense license = clsLicense.FindLicenseByApplicationID(_LDLApplication.Application.ApplicationID);
+            if (license != null)
+            {
+                linkLabelLicenseInfo.Enabled = true;
+            }
+            else
+                linkLabelLicenseInfo.Enabled = false;
 
 
         }
@@ -94,6 +101,13 @@ namespace DVLDPresentationLayer.Controls
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
+
+        }
+
+        private void linkLabelLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmLicenseInfo frmLicense = new frmLicenseInfo(_LDLApplication.LDLApplicationID);
+            frmLicense.ShowDialog();
 
         }
     }
