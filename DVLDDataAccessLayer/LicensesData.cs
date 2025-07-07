@@ -13,60 +13,7 @@ namespace DVLDDataAccessLayer
     public class clsLicensesData
     {
 
-        public static DataTable GetAllInternationalLicencesByPersonID(int PersonID)
-        {
-
-            DataTable dt = new DataTable();
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-
-            string query = @" select I.InternationalLicenseID as [Int.License ID], I.ApplicationID as [Application ID], I.IssuedUsingLocalLicenseID as [L.License ID],
-I.IssueDate as [Issue Date], I.ExpirationDate as [Expiration Date], I.IsActive as [Is Active]
-  from InternationalLicenses I inner Join Applications On I.ApplicationID = Applications.ApplicationID
-  where Applications.ApplicantPersonID = @PersonID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@PersonID", PersonID);
-
-            try
-            {
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-
-                {
-                    dt.Load(reader);
-                    Debug.WriteLine("✅ Rows returned for PersonID = " + PersonID);
-                    Debug.WriteLine("Total rows loaded: " + dt.Rows.Count);
-
-                }
-                else
-                {
-
-
-                    Debug.WriteLine("❌ No rows returned for PersonID = " + PersonID);
-
-                }
-
-                reader.Close();
-
-
-            }
-
-            catch (Exception ex)
-            {
-                throw new Exception("Query failed: " + ex.Message, ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return dt;
-
-        }
-
+      
 
         public static DataTable GetAllLocalLicencesByPersonID(int PersonID)
         {
@@ -146,7 +93,7 @@ I.IssueDate as [Issue Date], I.ExpirationDate as [Expiration Date], I.IsActive a
                     Notes = reader["Notes"].ToString();
                     PaidFees = (decimal)reader["PaidFees"];
                     IsActive = (bool)reader["IsActive"];
-                    IssueReason = (int)reader["IssueReason"];
+                    IssueReason = Convert.ToInt32(reader["IssueReason"]);
                     CreatedByUserID = (int)reader["CreatedByUserID"];
                 }
 

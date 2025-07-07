@@ -21,6 +21,123 @@ namespace DVLDPresentationLayer
             InitializeComponent();
         }
 
+        public int _LicenseID;
+        clsLicense _License;
+
+        public int LicenseID
+        {
+            get { return _LicenseID; }
+        }
+
+        public clsLicense SelectedLicenseInfo
+        { get { return _License; } }
+
+        public void LoadInfo(int LicenseID)
+        {
+            _LicenseID = LicenseID;
+            _License = clsLicense.FindLicenseByID(LicenseID);
+            if (_License == null)
+            {
+                MessageBox.Show("License not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _LicenseID = -1; // Reset LicenseID if not found
+                return;
+            }   
+            clsApplication Application = clsApplication.FindApplicationByID(_License.ApplicationID);
+            clsLicenseClass licenseClass = clsLicenseClass.FindLicenseClassByID(_License.LicenseClassID);
+            clsPerson person = clsPerson.FindPersonByID(Application.ApplicantPersonID);
+
+            if (Application == null || licenseClass == null || person == null)
+            {
+                MessageBox.Show("Error on Finding Data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            lbClassName.Text = licenseClass.ClassName;
+            lbFullName.Text = person.FullName;
+            lbLicenseID.Text = _License.LicenseID.ToString();
+            _LicenseID = _License.LicenseID;
+            lbNationalNo.Text = person.NationalNo;
+            if (person.Gendor == 0)
+            {
+                pbGendor.Image = Properties.Resources.Man_32;
+                lbGendor.Text = "Male";
+            }
+            else if (person.Gendor == 1)
+            {
+                pbGendor.Image = Properties.Resources.Male_512;
+                lbGendor.Text = "Male";
+            }
+            lbIssueDate.Text = _License.IssueDate.ToString("dd/MMM/yyyy");
+            switch (_License.IssueReason)
+            {
+                case 1:
+                    lbIssueReason.Text = "First Time";
+                    break;
+                case 2:
+                    lbIssueReason.Text = "Renewal";
+                    break;
+                case 3:
+                    lbIssueReason.Text = "Replacement";
+                    break;
+            }
+            if (_License.Notes == null || _License.Notes == "")
+            {
+                lbNotes.Text = "No Notes";
+            }
+            else
+            {
+                lbNotes.Text = _License.Notes;
+            }
+
+
+            lbIsActive.Text = _License.IsActive ? "Yes" : "No";
+            lbDateOfBirth.Text = person.DateOfBirth.ToString("dd/MMM/yyyy");
+            lbDriverID.Text = _License.Driver.DriverID.ToString();
+            lbExpirationDate.Text = _License.ExpirationDate.ToString("dd/MMM/yyyy");
+            lbIsDetained.Text = "No";
+
+            if (!string.IsNullOrEmpty(person.ImagePath))
+            {
+                string imageFullPath = GetImageFullPath(person.ImagePath);
+
+                if (File.Exists(imageFullPath))
+                {
+                    using (var stream = new FileStream(imageFullPath, FileMode.Open, FileAccess.Read))
+                    {
+                        pbPersonImage.Image = Image.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    //pbPersonImage.Image = null; // or default
+                    if (person.Gendor == 0)
+                    {
+                        pbPersonImage.Image = Properties.Resources.Male_512;
+                    }
+                    else if (person.Gendor == 1)
+                    {
+                        pbPersonImage.Image = Properties.Resources.Female_512;
+                    }
+
+                }
+
+            }
+            else
+            {
+                //pbPersonImage.Image = null; // or default
+                if (person.Gendor == 0)
+                {
+                    pbPersonImage.Image = Properties.Resources.Male_512;
+                }
+                else if (person.Gendor == 1)
+                {
+                    pbPersonImage.Image = Properties.Resources.Female_512;
+                }
+
+            }
+
+        }
+
         public void FillData(int LDLApplication)
         {
 
@@ -30,6 +147,7 @@ namespace DVLDPresentationLayer
             if (_LDLApplication == null)
             {
                 MessageBox.Show("LDL Application not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _LDLApplicationID = -1; 
                 return;
             }
             clsPerson person = clsPerson.FindPersonByID(_LDLApplication.Application.ApplicantPersonID);
@@ -125,6 +243,11 @@ namespace DVLDPresentationLayer
             string imagesFolder = Path.Combine(solutionRoot, "DVLDPresentationLayer", "DVLDPeopleImages");
 
             return Path.Combine(imagesFolder, imageFileName);
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
        

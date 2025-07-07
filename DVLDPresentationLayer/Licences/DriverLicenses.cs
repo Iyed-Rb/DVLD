@@ -52,7 +52,7 @@ namespace DVLDPresentationLayer
                     dgvLocalLicenses.Columns["Is Active"].Width = 100;
 
             
-                dgvAllInternationalLicenses.DataSource = clsLicense.GetAllInternationalLicenses(PersonID);
+                dgvAllInternationalLicenses.DataSource = clsInternationalLicense.GetInternationalLicensesByPersonID(PersonID);
                 int rowCount2 = dgvAllInternationalLicenses.Rows.Count;
                 lbCountRow.Text = rowCount2.ToString();
 
@@ -89,6 +89,11 @@ namespace DVLDPresentationLayer
         private void label1_Click(object sender, EventArgs e)
         {
              
+        }
+
+        private void dgvAllInternationalLicenses_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

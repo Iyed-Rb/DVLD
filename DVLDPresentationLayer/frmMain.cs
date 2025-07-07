@@ -85,5 +85,17 @@ namespace DVLDPresentationLayer
             frmDriversList.ShowDialog();
 
         }
+
+        private void internationalLicenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNewInternationalLicenseApplication frmNewInternationalLicenseApplication = new frmNewInternationalLicenseApplication();
+            frmNewInternationalLicenseApplication.ShowDialog();
+        }
+
+        private void internationalLicenceApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInternationalicensesLists frmInternationalicensesLists = new frmInternationalicensesLists();
+            frmInternationalicensesLists.ShowDialog();
+        }
     }
 }

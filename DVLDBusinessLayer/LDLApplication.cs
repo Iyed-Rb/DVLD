@@ -24,15 +24,25 @@ namespace DVLDBusinessLayer
             get => Application.ApplicationID;
             set
             {
+                Application = clsApplication.FindApplicationByID(value);
                 if (Application == null)
                     Application = new clsApplication();
 
                 Application.ApplicationID = value;
             }
         }
+        public int LicenseClassID
+        {
+            get => LicenseClass.LicenseClassID;
+            set
+            {
+                LicenseClass = clsLicenseClass.FindLicenseClassByID(value);
+                if (LicenseClass == null)
+                    LicenseClass = new clsLicenseClass();
 
-        public int LicenseClassID => LicenseClass.LicenseClassID;
-
+                LicenseClass.LicenseClassID = value;
+            }
+        }
 
         public clsLDLApplication()
         {

@@ -35,17 +35,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvLocalLicenses = new System.Windows.Forms.DataGridView();
             this.tbInternational = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dgvAllInternationalLicenses = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
             this.lbCountRow2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dgvAllInternationalLicenses = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tbLocal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalLicenses)).BeginInit();
             this.tbInternational.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllInternationalLicenses)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -132,27 +132,25 @@
             this.tbInternational.Text = "International";
             this.tbInternational.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // lbCountRow2
             // 
-            this.groupBox1.Controls.Add(this.tabControl1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1022, 240);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Driver Licenses";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.lbCountRow2.AutoSize = true;
+            this.lbCountRow2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCountRow2.Location = new System.Drawing.Point(103, 148);
+            this.lbCountRow2.Name = "lbCountRow2";
+            this.lbCountRow2.Size = new System.Drawing.Size(17, 18);
+            this.lbCountRow2.TabIndex = 13;
+            this.lbCountRow2.Text = "0";
             // 
-            // label2
+            // label3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(241, 18);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "International Licenses History: ";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 148);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 18);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "# Records:";
             // 
             // dgvAllInternationalLicenses
             // 
@@ -166,26 +164,29 @@
             this.dgvAllInternationalLicenses.Name = "dgvAllInternationalLicenses";
             this.dgvAllInternationalLicenses.Size = new System.Drawing.Size(963, 112);
             this.dgvAllInternationalLicenses.TabIndex = 3;
+            this.dgvAllInternationalLicenses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAllInternationalLicenses_CellContentClick);
             // 
-            // label3
+            // label2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 148);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 18);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "# Records:";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(241, 18);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "International Licenses History: ";
             // 
-            // lbCountRow2
+            // groupBox1
             // 
-            this.lbCountRow2.AutoSize = true;
-            this.lbCountRow2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCountRow2.Location = new System.Drawing.Point(103, 148);
-            this.lbCountRow2.Name = "lbCountRow2";
-            this.lbCountRow2.Size = new System.Drawing.Size(17, 18);
-            this.lbCountRow2.TabIndex = 13;
-            this.lbCountRow2.Text = "0";
+            this.groupBox1.Controls.Add(this.tabControl1);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1022, 240);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Driver Licenses";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // DriverLicenses
             // 
@@ -201,8 +202,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalLicenses)).EndInit();
             this.tbInternational.ResumeLayout(false);
             this.tbInternational.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllInternationalLicenses)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

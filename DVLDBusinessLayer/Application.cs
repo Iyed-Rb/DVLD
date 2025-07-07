@@ -78,6 +78,8 @@ namespace DVLDBusinessLayer
                 return null;
         }
 
+     
+
         public static clsApplication FindApplicationByPersonIDAnd(int ApplicationID, int LicenceClass)
         {
             int ApplicantPersonID = -1;

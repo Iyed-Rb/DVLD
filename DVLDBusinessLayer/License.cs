@@ -81,11 +81,6 @@ namespace DVLDBusinessLayer
             return clsLicensesData.GetAllLocalLicencesByPersonID(PersonID);  
         }
 
-        public static DataTable GetAllInternationalLicenses(int PersonID)
-        {
-            return clsLicensesData.GetAllInternationalLicencesByPersonID(PersonID);  
-        }   
-
 
         public static clsLicense FindLicenseByID(int LicenseID)
         {

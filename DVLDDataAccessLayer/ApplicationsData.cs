@@ -126,6 +126,9 @@ namespace DVLDDataAccessLayer
             return isFound;
         }
 
+     
+
+
         public static int AddNewApplication(int ApplicantPersonID, DateTime ApplicationDate, int ApplicationTypeID,
           int ApplicationStatus, DateTime LastStatusDate,  decimal PaidFees, int CreatedByUserID)
         {
