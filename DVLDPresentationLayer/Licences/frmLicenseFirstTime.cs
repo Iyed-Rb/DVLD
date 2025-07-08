@@ -70,14 +70,12 @@ namespace DVLDPresentationLayer
 
             }
 
-
-
             License.LicenseClassID = _LDLApplication.LicenseClassID;
             License.IssueDate = DateTime.Now;
             License.ExpirationDate = DateTime.Now.AddYears(_LDLApplication.LicenseClass.DefaultValidityLength);
             License.Notes = textBox1.Text;
             License.PaidFees = _LDLApplication.LicenseClass.ClassFees;
-            License.IsActive = DateTime.Now < License.ExpirationDate;
+            License.IsActive = true;
             License.IssueReason = 1;
             License.CreatedByUserID = clsGlobalSettings.CurrentUser.UserID;
 

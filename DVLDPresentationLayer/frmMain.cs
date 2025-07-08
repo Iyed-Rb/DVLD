@@ -97,5 +97,12 @@ namespace DVLDPresentationLayer
             frmInternationalicensesLists frmInternationalicensesLists = new frmInternationalicensesLists();
             frmInternationalicensesLists.ShowDialog();
         }
+
+        private void renewDrivingLicenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLDL frmRenewLDL = new frmRenewLDL();    
+            frmRenewLDL.ShowDialog();
+
+        }
     }
 }

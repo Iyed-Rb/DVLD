@@ -23,6 +23,7 @@ namespace DVLDPresentationLayer
         {
             llShowLicenseHistory.Enabled = false;
             llShowLicenseInfo.Enabled = false;
+            btIssue.Enabled = false;
 
             ctrlLicenseWithFilter1.OnLicenseSelected += ctrlDriverLicenseInfoWithFilter1_OnLicenseSelected;
 
@@ -44,14 +45,15 @@ namespace DVLDPresentationLayer
 
             llShowLicenseHistory.Enabled = (SelectedLicenseID != -1);
 
+            //MessageBox.Show("SelectedLicenseID == " + SelectedLicenseID, "info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             if (SelectedLicenseID == -1)
             {
+                llShowLicenseInfo.Enabled = false;
+                //MessageBox.Show("SelectedLicenseID == -1 , return", "info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-
-            llShowLicenseHistory.Enabled = true;
-            
             //check the license class, person could not issue international license without having
             //normal license of class 3.
 
@@ -63,6 +65,11 @@ namespace DVLDPresentationLayer
             if (ctrlLicenseWithFilter1.SelectedLicenseInfo.IsActive == false)
             {
                 MessageBox.Show("Your Local License is not Active", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (ctrlLicenseWithFilter1.SelectedLicenseInfo.ExpirationDate < DateTime.Now)
+            {
+                MessageBox.Show("This License Is Expired", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -83,6 +90,7 @@ namespace DVLDPresentationLayer
             }
 
             btIssue.Enabled = true;
+            llShowLicenseInfo.Enabled = false;
 
         }
 
@@ -138,7 +146,7 @@ namespace DVLDPresentationLayer
             llShowLicenseInfo.Enabled = true;
             btIssue.Enabled = false;
             ctrlLicenseWithFilter1.FilterEnabled = false;
-            llShowLicenseInfo.Enabled = true;
+           
         }
 
         private void llShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

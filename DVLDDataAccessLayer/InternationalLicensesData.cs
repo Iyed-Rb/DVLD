@@ -241,10 +241,6 @@ I.IssueDate as [Issue Date], I.ExpirationDate as [Expiration Date], I.IsActive a
         }
 
 
-
-
-
-
         public static bool GetInternationalLicenseInfoByApplicationID(
     ref int InternationalLicenseID,
     int ApplicationID,

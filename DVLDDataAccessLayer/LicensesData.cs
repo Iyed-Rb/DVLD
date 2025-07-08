@@ -13,8 +13,6 @@ namespace DVLDDataAccessLayer
     public class clsLicensesData
     {
 
-      
-
         public static DataTable GetAllLocalLicencesByPersonID(int PersonID)
         {
 
@@ -26,7 +24,6 @@ namespace DVLDDataAccessLayer
  Licenses.IsActive as [Is Active] from Licenses inner Join LicenseClasses
  ON Licenses.LicenseClassID = LicenseClasses.LicenseClassID
  Inner Join Applications On Applications.ApplicationID = Licenses.ApplicationID
- Inner Join LocalDrivingLicenseApplications L On L.ApplicationID = Applications.ApplicationID
  where Applications.ApplicantPersonID = @PersonID";
 
             SqlCommand command = new SqlCommand(query, connection);

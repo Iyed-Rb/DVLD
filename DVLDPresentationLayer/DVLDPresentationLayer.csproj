@@ -70,34 +70,40 @@
     <Compile Include="Applications\ctrlApplicationInfo.Designer.cs">
       <DependentUpon>ctrlApplicationInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="ctrlInternationalLicenseInfo.cs">
+    <Compile Include="frmRenewLDL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRenewLDL.Designer.cs">
+      <DependentUpon>frmRenewLDL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InternationalLicenses\ctrlInternationalLicenseInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctrlInternationalLicenseInfo.Designer.cs">
+    <Compile Include="InternationalLicenses\ctrlInternationalLicenseInfo.Designer.cs">
       <DependentUpon>ctrlInternationalLicenseInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="ctrlLicenseWithFilter.cs">
+    <Compile Include="Licences\ctrlLicenseWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctrlLicenseWithFilter.Designer.cs">
+    <Compile Include="Licences\ctrlLicenseWithFilter.Designer.cs">
       <DependentUpon>ctrlLicenseWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmInternationalicensesLists.cs">
+    <Compile Include="InternationalLicenses\frmInternationalicensesLists.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmInternationalicensesLists.Designer.cs">
+    <Compile Include="InternationalLicenses\frmInternationalicensesLists.Designer.cs">
       <DependentUpon>frmInternationalicensesLists.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmInternationalLicenseInfo.cs">
+    <Compile Include="InternationalLicenses\frmInternationalLicenseInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmInternationalLicenseInfo.Designer.cs">
+    <Compile Include="InternationalLicenses\frmInternationalLicenseInfo.Designer.cs">
       <DependentUpon>frmInternationalLicenseInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNewInternationalLicenseApplication.cs">
+    <Compile Include="InternationalLicenses\frmNewInternationalLicenseApplication.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNewInternationalLicenseApplication.Designer.cs">
+    <Compile Include="InternationalLicenses\frmNewInternationalLicenseApplication.Designer.cs">
       <DependentUpon>frmNewInternationalLicenseApplication.cs</DependentUpon>
     </Compile>
     <Compile Include="Licences\DriverLicenses.cs">
@@ -264,19 +270,22 @@
     <EmbeddedResource Include="Applications\ctrlApplicationInfo.resx">
       <DependentUpon>ctrlApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ctrlInternationalLicenseInfo.resx">
+    <EmbeddedResource Include="frmRenewLDL.resx">
+      <DependentUpon>frmRenewLDL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InternationalLicenses\ctrlInternationalLicenseInfo.resx">
       <DependentUpon>ctrlInternationalLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ctrlLicenseWithFilter.resx">
+    <EmbeddedResource Include="Licences\ctrlLicenseWithFilter.resx">
       <DependentUpon>ctrlLicenseWithFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmInternationalicensesLists.resx">
+    <EmbeddedResource Include="InternationalLicenses\frmInternationalicensesLists.resx">
       <DependentUpon>frmInternationalicensesLists.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmInternationalLicenseInfo.resx">
+    <EmbeddedResource Include="InternationalLicenses\frmInternationalLicenseInfo.resx">
       <DependentUpon>frmInternationalLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNewInternationalLicenseApplication.resx">
+    <EmbeddedResource Include="InternationalLicenses\frmNewInternationalLicenseApplication.resx">
       <DependentUpon>frmNewInternationalLicenseApplication.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licences\DriverLicenses.resx">

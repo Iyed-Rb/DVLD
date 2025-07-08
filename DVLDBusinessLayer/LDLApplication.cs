@@ -81,7 +81,7 @@ namespace DVLDBusinessLayer
                 clsLicenseClass licenseClass = clsLicenseClass.FindLicenseClassByID(LicenseClassID);
 
 
-                if (application == null && licenseClass == null)
+                if (application == null || licenseClass == null)
                 {
                     return null; // If application or license class is not found, return null
                 }

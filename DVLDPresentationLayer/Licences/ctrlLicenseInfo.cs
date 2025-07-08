@@ -38,6 +38,19 @@ namespace DVLDPresentationLayer
             _License = clsLicense.FindLicenseByID(LicenseID);
             if (_License == null)
             {
+                lbClassName.Text = "[????]";
+                lbFullName.Text = "[????]";
+                lbLicenseID.Text = "[????]";
+                lbNationalNo.Text = "[????]";
+                lbGendor.Text = "[????]";
+                lbIssueDate.Text = "[????]";
+                lbIssueReason.Text = "[????]";
+                lbNotes.Text = "[????]";
+                lbIsActive.Text = "[????]"; 
+                lbDateOfBirth.Text = "[????]";
+                lbDriverID.Text = "[????]"; 
+                lbIsDetained.Text = "[????]";
+                pbPersonImage.Image = null; // Clear the image
                 MessageBox.Show("License not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _LicenseID = -1; // Reset LicenseID if not found
                 return;

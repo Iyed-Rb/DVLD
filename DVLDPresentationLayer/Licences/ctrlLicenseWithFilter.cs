@@ -102,5 +102,10 @@ namespace DVLDPresentationLayer
         {
 
         }
+
+        private void ctrlLicenseWithFilter_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

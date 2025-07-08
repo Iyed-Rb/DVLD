@@ -17,7 +17,7 @@ namespace DVLDBusinessLayer
         public enMode Mode = enMode.AddNew;
 
         public int LicenseID { get; set; }
-        public int ApplicationID { get; set; }
+        public clsApplication Application { get; set; }
         public clsDriver Driver { get; set; }
         public int LicenseClassID   { get; set; }
         public DateTime IssueDate { get; set; }
@@ -41,10 +41,23 @@ namespace DVLDBusinessLayer
             }
         }
 
+        public int ApplicationID
+        {
+            get => Application.ApplicationID;
+            set
+            {
+                Application = clsApplication.FindApplicationByID(value);
+
+                if (Application == null)
+                    Application = new clsApplication();
+            }
+        }
+
+
         public clsLicense()
         {
             LicenseID = -1;
-            ApplicationID = -1;
+            Application = new clsApplication();
             Driver = new clsDriver();
             LicenseClassID = -1;
             IssueDate = DateTime.MinValue;
@@ -57,13 +70,13 @@ namespace DVLDBusinessLayer
             Mode = enMode.AddNew;
         }
 
-        private clsLicense(int licenseID, int applicationID, clsDriver driver, int licenseClassID,
+        private clsLicense(int licenseID, int applicationID, int driverID, int licenseClassID,
             DateTime issueDate, DateTime expirationDate, string notes, decimal paidFees,
             bool isActive, int issueReason, int createdByUserID)
         {
             LicenseID = licenseID;
-            ApplicationID = applicationID;
-            this.Driver = driver;
+            this.ApplicationID = applicationID;
+            this.DriverID = driverID;
             LicenseClassID = licenseClassID;
             IssueDate = issueDate;
             ExpirationDate = expirationDate;
@@ -96,13 +109,14 @@ namespace DVLDBusinessLayer
             ref issueDate,ref expirationDate,ref notes,ref paidFees, ref isActive, ref issueReason,ref createdByUserID))
             {
                 clsDriver Driver = clsDriver.FindDriverByID(driverID);  
+                clsApplication Application = clsApplication.FindApplicationByID(applicationID);
           
-                if (Driver == null)
+                if (Driver == null || Application == null)
                 {
                     return null; // If application or license class is not found, return null
                 }
 
-                return new clsLicense(LicenseID, applicationID, Driver, licenseClassID,
+                return new clsLicense(LicenseID, applicationID, driverID, licenseClassID,
                     issueDate, expirationDate, notes, paidFees, isActive, issueReason, createdByUserID);
             }
             else
@@ -112,16 +126,16 @@ namespace DVLDBusinessLayer
 
         private bool _AddNewLicense()
         {
-            LicenseID = clsLicensesData.AddNewLicense(ApplicationID, Driver.DriverID, LicenseClassID,
-                IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
+            this.LicenseID = clsLicensesData.AddNewLicense(this.ApplicationID, this.Driver.DriverID, this.LicenseClassID,
+                this.IssueDate, this.ExpirationDate, this.Notes, this.PaidFees, this.IsActive, this.IssueReason, this.CreatedByUserID);
 
-            return (LicenseID != -1);
+            return (this.LicenseID != -1);
         }
 
         private bool _UpdateLicense()
         {
-            return clsLicensesData.UpdateLicense(LicenseID, ApplicationID, this.Driver.DriverID, LicenseClassID,
-                IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
+            return clsLicensesData.UpdateLicense(this.LicenseID, this.ApplicationID, this.Driver.DriverID, this.LicenseClassID,
+                this.IssueDate, this.ExpirationDate, this.Notes, this.PaidFees, this.IsActive, this.IssueReason, this.CreatedByUserID);
         }
 
         public static clsLicense FindLicenseByApplicationID(int ApplicationID)
@@ -144,7 +158,7 @@ namespace DVLDBusinessLayer
                     return null; // If application or license class is not found, return null
                 }
 
-                return new clsLicense(LicenseID, ApplicationID, Driver, licenseClassID,
+                return new clsLicense(LicenseID, ApplicationID, driverID, licenseClassID,
                     issueDate, expirationDate, notes, paidFees, isActive, issueReason, createdByUserID);
             }
             else
@@ -166,12 +180,15 @@ namespace DVLDBusinessLayer
                             return false;
                     }
 
-                    if (_AddNewLicense())
+                    if (Application.Save()) // Save Application first
                     {
-                        Mode = enMode.Update;
-                        return true;
-                    }
 
+                        if (_AddNewLicense())
+                        {
+                            Mode = enMode.Update;
+                            return true;
+                        }
+                    }
                     return false;
 
                 case enMode.Update:

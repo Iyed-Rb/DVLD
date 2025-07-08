@@ -103,6 +103,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ctrlLicenseWithFilter";
             this.Size = new System.Drawing.Size(870, 353);
+            this.Load += new System.EventHandler(this.ctrlLicenseWithFilter_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
