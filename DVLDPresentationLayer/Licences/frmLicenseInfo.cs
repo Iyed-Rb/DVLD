@@ -13,15 +13,16 @@ namespace DVLDPresentationLayer
     public partial class frmLicenseInfo : Form
     {
         int _LDLApplicationID;
-        public frmLicenseInfo(int LDLApplicationID)
+        int _LicenseID;
+        public frmLicenseInfo(int LicenseID)
         {
             InitializeComponent();
-            _LDLApplicationID = LDLApplicationID;
+            _LicenseID = LicenseID;
         }
 
         private void frmLicenseInfo_Load(object sender, EventArgs e)
         {
-            ctrlLicenseInfo1.FillData(_LDLApplicationID);
+            ctrlLicenseInfo1.LoadInfo(_LicenseID);
         }
     }
 }

@@ -70,11 +70,35 @@
     <Compile Include="Applications\ctrlApplicationInfo.Designer.cs">
       <DependentUpon>ctrlApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDetainLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDetainLicense.Designer.cs">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListDetainedLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListDetainedLicenses.Designer.cs">
+      <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReleaseDetainedLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReleaseDetainedLicense.Designer.cs">
+      <DependentUpon>FrmReleaseDetainedLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRenewLDL.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmRenewLDL.Designer.cs">
       <DependentUpon>frmRenewLDL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReplacementForDamagedLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReplacementForDamagedLicense.Designer.cs">
+      <DependentUpon>frmReplacementForDamagedLicense.cs</DependentUpon>
     </Compile>
     <Compile Include="InternationalLicenses\ctrlInternationalLicenseInfo.cs">
       <SubType>UserControl</SubType>
@@ -270,8 +294,20 @@
     <EmbeddedResource Include="Applications\ctrlApplicationInfo.resx">
       <DependentUpon>ctrlApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDetainLicense.resx">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListDetainedLicenses.resx">
+      <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReleaseDetainedLicense.resx">
+      <DependentUpon>FrmReleaseDetainedLicense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRenewLDL.resx">
       <DependentUpon>frmRenewLDL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReplacementForDamagedLicense.resx">
+      <DependentUpon>frmReplacementForDamagedLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InternationalLicenses\ctrlInternationalLicenseInfo.resx">
       <DependentUpon>ctrlInternationalLicenseInfo.cs</DependentUpon>

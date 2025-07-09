@@ -510,7 +510,9 @@ namespace DVLDPresentationLayer
 
         private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmLicenseInfo frmLicenseInfo = new frmLicenseInfo((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
+            clsLDLApplication lDLApplication = clsLDLApplication.FindLDLApplicationByID((int)dgvAllLDLApplications.CurrentRow.Cells[0].Value);
+            clsLicense license = clsLicense.FindLicenseByApplicationID(lDLApplication.ApplicationID);
+            frmLicenseInfo frmLicenseInfo = new frmLicenseInfo(license.LicenseID);
  
             frmLicenseInfo.ShowDialog();
             _RefreshApplicationList();

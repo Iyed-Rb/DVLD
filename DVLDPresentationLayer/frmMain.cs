@@ -104,5 +104,41 @@ namespace DVLDPresentationLayer
             frmRenewLDL.ShowDialog();
 
         }
+
+        private void replacementForLostOrDamagedLicenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplacementForDamagedLicense frmReplacementForDamagedLicense = new frmReplacementForDamagedLicense();
+            frmReplacementForDamagedLicense.ShowDialog();
+        }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense detainLicense = new frmDetainLicense();    
+            detainLicense.ShowDialog();
+        }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmReleaseDetainedLicense detainedLicense = new FrmReleaseDetainedLicense();
+            detainedLicense.ShowDialog();
+        }
+
+        private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDetainedLicenses frmListDetainedLicenses = new frmListDetainedLicenses();
+            frmListDetainedLicenses.ShowDialog();
+        }
+
+        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageLDLApplications frmManageLDLApplications = new frmManageLDLApplications();
+            frmManageLDLApplications.ShowDialog();
+        }
+
+        private void manageApplicationsTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmManageApplicationsTypes frmManageApplicationsTypes = new FrmManageApplicationsTypes();
+            frmManageApplicationsTypes.ShowDialog();
+        }
     }
 }

@@ -73,6 +73,14 @@ namespace DVLDPresentationLayer
                 return;
             }
 
+            if (clsDetainedLicense.IsLicenseDetained(SelectedLicenseID))
+            {
+                MessageBox.Show("Selected License is Detained\nYou must Release it First", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                llShowLicenseInfo.Enabled = false;
+                btIssue.Enabled = false;
+                return;
+            }
+
             //check if person already have an active international license
             int ActiveInternaionalLicenseID = clsInternationalLicense.GetActiveInternationalLicenseIDByDriverID(ctrlLicenseWithFilter1.SelectedLicenseInfo.DriverID);
 

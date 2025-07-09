@@ -108,6 +108,13 @@ namespace DVLDPresentationLayer
             lbDriverID.Text = _License.Driver.DriverID.ToString();
             lbExpirationDate.Text = _License.ExpirationDate.ToString("dd/MMM/yyyy");
             lbIsDetained.Text = "No";
+            if(clsDetainedLicense.IsLicenseDetained(_License.LicenseID))
+            {
+                lbIsDetained.Text = "yes";
+            }
+            else
+                lbIsDetained.Text = "No";
+
 
             if (!string.IsNullOrEmpty(person.ImagePath))
             {
@@ -204,7 +211,12 @@ namespace DVLDPresentationLayer
             lbDateOfBirth.Text = person.DateOfBirth.ToString("dd/MMM/yyyy");
             lbDriverID.Text = license.Driver.DriverID.ToString();
             lbExpirationDate.Text = license.ExpirationDate.ToString("dd/MMM/yyyy");
-            lbIsDetained.Text = "No";
+            if (clsDetainedLicense.IsLicenseDetained(license.LicenseID))
+            {
+                lbIsDetained.Text = "yes";
+            }
+            else
+                lbIsDetained.Text = "No";
 
 
             if (!string.IsNullOrEmpty(person.ImagePath))

@@ -59,7 +59,7 @@ namespace DVLDPresentationLayer
         public clsLicense SelectedLicenseInfo
         { get { return ctrlLicenseInfo1.SelectedLicenseInfo; } }
 
-        private void LoadLicenseInfo(int LicenseID)
+        public void LoadLicenseInfo(int LicenseID)
         {
             txtLicenseID.Text = LicenseID.ToString();
             ctrlLicenseInfo1.LoadInfo(LicenseID);

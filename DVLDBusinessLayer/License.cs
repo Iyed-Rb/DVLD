@@ -163,9 +163,7 @@ namespace DVLDBusinessLayer
             }
             else
                 return null;
-
         }
-
         
         public bool Save()
         {
@@ -197,8 +195,6 @@ namespace DVLDBusinessLayer
 
             return false;
         }
-
-
 
     }
 }
