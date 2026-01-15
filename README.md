@@ -18,4 +18,3 @@ A structured Windows Forms application that automates key services of a driving 
 - **Presentation Layer**: UI design, navigation, and user interaction  
 - **Business Logic Layer**: Core validation, workflows, and logic separation  
 - **Data Access Layer**: Direct database communication and query execution  
-- **DTOs**: Used for clean data exchange between layers  
